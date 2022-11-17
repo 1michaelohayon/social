@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize'
 import config from "./config"
 import { Umzug, SequelizeStorage } from 'umzug'
-require('ts-node/register')
 
 export const sequelize: Sequelize = new Sequelize(config.DATABASE_URL, {
   dialectOptions: {
