@@ -9,7 +9,7 @@ export interface Credentials {
 
 
 export interface UserContext {
-  currentUser : {
+  currentUser: {
     id: number,
     username: string,
     name: string
@@ -23,6 +23,8 @@ export interface NewUser {
   password: string
 }
 
-export interface NewMessage {
+export interface Message {
+  id: number,
   content: string,
+  likes: number
 }

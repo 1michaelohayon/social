@@ -39,7 +39,6 @@ type Query {
 type Mutation {
   addMessage(
     content: String!
-    userId: Int!
   ): Message
 
   addUser(

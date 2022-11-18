@@ -1,6 +1,6 @@
 import Message from "./models/message"
 import User from "./models/user"
-import { UserInputError } from "apollo-server-core"
+import { AuthenticationError, UserInputError } from "apollo-server-core"
 import jwt from "jsonwebtoken"
 import config from "./utils/config"
 import bcrypt from "bcrypt"
@@ -46,10 +46,13 @@ const resolvers = {
     },
 
 
-    addMessage: async (_root: undefined, args: NewMessage) => {
+    addMessage: async (_root: undefined, args: NewMessage, context: UserContext) => {
+      if (!context.currentUser){
+        throw new AuthenticationError("Not logged in")
+      }
       const newMessage = {
         content: args.content,
-        userId: args.userId,
+        userId: context.currentUser.id,
         createdAt: new Date(),
         updatedAt: new Date()
       }
