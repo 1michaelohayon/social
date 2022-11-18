@@ -6,10 +6,10 @@
     "@apollo/client": "^3.7.1",
     "apollo-link-context": "^1.0.20",
     "graphql": "^16.6.0",
+    "graphql-ws": "^5.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "subscriptions-transport-ws": "^0.11.0",
     "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },

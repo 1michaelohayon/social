@@ -1,20 +1,20 @@
 import { ApolloServer } from 'apollo-server-express'
-require('express-async-errors')
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import express from "express";
 import http from "http";
 
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
+
 import config from './utils/config';
-import User from './models/user';
 import jwt from 'jsonwebtoken';
+import User from './models/user';
 
 
 import typeDefs from "./schema";
 import resolvers from "./resolvers"
 import { connectToDatabase } from "./utils/db"
-import { execute, subscribe } from 'graphql';
-import { SubscriptionServer } from 'subscriptions-transport-ws'
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 
 
 interface JwtPayload {
@@ -32,11 +32,12 @@ const start = async () => {
 
   const schema = makeExecutableSchema({ typeDefs, resolvers })
 
-  const subscribtionServer = SubscriptionServer.create(
-    { schema, execute, subscribe },
-    { server: httpServer, path: '' }
-  )
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/',
+  });
 
+  const serverCleanup = useServer({ schema }, wsServer);
 
 
   const server = new ApolloServer({
@@ -58,18 +59,20 @@ const start = async () => {
       async serverWillStart() {
         return {
           async drainServer() {
-            subscribtionServer.close();
+            await serverCleanup.dispose()
           },
-        };
-      }
-    }
+        }
+      },
+     },
     ],
-  });
+  })
+
   await server.start()
   server.applyMiddleware({
     app,
     path: '/'
   })
+
   httpServer.listen(config.PORT, () =>
     console.log(`Server is now running on http://localhost:${config.PORT}`)
   )

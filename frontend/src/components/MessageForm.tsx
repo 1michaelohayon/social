@@ -6,7 +6,6 @@ const MessageForm = () => {
   const { addMessage } = useCreateMessage()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log(content.input.value);
     await addMessage(content.input.value)
     content.reset()
   }

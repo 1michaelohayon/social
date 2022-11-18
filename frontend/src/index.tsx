@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { setContext } from '@apollo/client/link/context'
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/client/link/ws'
+
+import { createClient } from 'graphql-ws';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import {
   ApolloClient,
   ApolloProvider,
@@ -23,12 +25,10 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
-const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/',
-  options: {
-    reconnect: true,
-  },
-})
+
+const wsLink = new GraphQLWsLink(
+  createClient({ url: 'ws://localhost:4000', })
+)
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query)

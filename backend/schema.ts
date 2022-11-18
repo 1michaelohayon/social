@@ -19,7 +19,9 @@ type Token {
   value: String!
 }
 
-
+type Subscription {
+  messageAdd: Message!
+}
 
 
 

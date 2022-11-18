@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken"
 import config from "./utils/config"
 import bcrypt from "bcrypt"
 import { NewUser, NewMessage, Credentials, UserContext } from "./types"
+import { PubSub } from "graphql-subscriptions"
+
+const pubsub = new PubSub()
 
 
 const resolvers = {
@@ -47,7 +50,7 @@ const resolvers = {
 
 
     addMessage: async (_root: undefined, args: NewMessage, context: UserContext) => {
-      if (!context.currentUser){
+      if (!context.currentUser) {
         throw new AuthenticationError("Not logged in")
       }
       const newMessage = {
@@ -56,7 +59,9 @@ const resolvers = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-      return await Message.create(newMessage)
+      const message = await Message.create(newMessage)
+      await pubsub.publish("MESSAGE_ADDED", { messageAdd: message })
+      return message
     },
 
     addUser: async (_root: undefined, args: NewUser) => {
@@ -72,8 +77,11 @@ const resolvers = {
       return await User.create(newUser)
     },
   },
-
-
+  Subscription: {
+    messageAdd: {
+      subscribe: () => pubsub.asyncIterator(['MESSAGE_ADDED']),
+    },
+  },
 }
 
 
