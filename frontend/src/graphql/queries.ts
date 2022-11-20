@@ -14,24 +14,40 @@ subscription Subscription {
 `
 
 export const GET_MESSAGES = gql`
-query Query {
+query AllMessages {
   allMessages {
     content
     id
     likes
-    userId
+    user {
+      id
+    }
   }
 }
 `
 
 
 export const GET_LOGGED_USER = gql`
-query
-  me {
+query Me {
   me {
     id
     name
     username
+    likedMessages {
+      message {
+        id
+      }
+    }
+  }
+}
+`
+
+export const GET_USER_LIKED_MESSAGES = gql`
+query Me {
+  me {
+    likedMessages {
+      messageId
+    }
   }
 }
 `

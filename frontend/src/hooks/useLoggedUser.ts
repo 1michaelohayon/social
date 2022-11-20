@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_LOGGED_USER } from '../graphql/queries'
-
-
+import { User } from '../types';
 const useLoggedUser = () => {
-  const [logged, setLoggedUser] = useState();
-
+  const [logged, setLoggedUser] = useState<User | null>(null);
   const response = useQuery(GET_LOGGED_USER, {
     fetchPolicy: 'cache-and-network'
   });
@@ -25,8 +23,7 @@ const useLoggedUser = () => {
     }
   }, [response.data]);
 
-
-  return { logged, loading, refetch: response.refetch };
+  return { logged, loading, refetch: response.refetch, };
 
 };
 

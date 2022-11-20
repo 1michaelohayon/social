@@ -15,8 +15,7 @@ const SignIn = () => {
     event.preventDefault()
     try {
       const creds: Credentials = { username: username.input.value, password: password.input.value }
-      const data = await signIn(creds);
-      console.log('Data ', data);
+      await signIn(creds);
     } catch (e) {
       console.log(e);
     }

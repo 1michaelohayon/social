@@ -30,3 +30,14 @@ mutation AddUser($username: String!, $name: String!, $password: String!) {
   }
 }
 `
+
+export const ADD_LIKE =gql`
+mutation AddLike($messageId: Int!) {
+  addLike(messageId: $messageId) {
+    id
+    content
+    likes
+    userId
+  }
+}
+`

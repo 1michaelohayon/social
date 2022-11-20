@@ -22,14 +22,12 @@ const resolvers = {
         { model: User, as: "user" },
         { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
       ] })
-      console.log(messages)
       return messages
     },
     allUsers: async () => {
       const users = await User.findAll({ include: [
         { model: likedMessages, include: [{ model: Message, as: "message" }] },
       ] })
-      console.log(users);
      
       return users
     }

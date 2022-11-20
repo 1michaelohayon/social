@@ -28,3 +28,17 @@ export interface Message {
   content: string,
   likes: number
 }
+
+
+
+ interface likedMessaged {
+  messageId: number;
+  userId?: number;
+}
+
+export interface User {
+  id: number,
+  username: string,
+  name: string,
+  likedMessages: [likedMessaged]
+}

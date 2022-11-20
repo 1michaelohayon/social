@@ -10,7 +10,7 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import config from './utils/config';
 import jwt from 'jsonwebtoken';
 import model from "./models"
-const {User, likedMessages} = model
+const { User, likedMessages, Message } = model
 
 import typeDefs from "./schema";
 import resolvers from "./resolvers"
@@ -49,7 +49,9 @@ const start = async () => {
           auth.substring(7), config.SECRET
         ) as JwtPayload
 
-        const currentUser = await User.findByPk(decodedToken.id, {include: [likedMessages]})
+        const currentUser = await User.findByPk(decodedToken.id, { include: [
+          { model: likedMessages, include: [{ model: Message, as: "message" }] },
+        ]})
 
         return { currentUser }
       } else return null
@@ -63,7 +65,7 @@ const start = async () => {
           },
         }
       },
-     },
+    },
     ],
   })
 
