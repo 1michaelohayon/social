@@ -1,15 +1,6 @@
 import { gql } from '@apollo/client';
 
 
-export const GET_LOGGED_USER = gql`
-query AllMessages {
-  me {
-    id
-    name
-    username
-  }
-}
-`
 
 export const MESSAGE_ADDED = gql`
 subscription Subscription {
@@ -29,6 +20,18 @@ query Query {
     id
     likes
     userId
+  }
+}
+`
+
+
+export const GET_LOGGED_USER = gql`
+query
+  me {
+  me {
+    id
+    name
+    username
   }
 }
 `

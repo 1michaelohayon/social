@@ -8,9 +8,9 @@ const useSignIn = () => {
   const apolloClient = useApolloClient()
 
 
-  const signIn = async ({ username, password }: Credentials) => {
-    const credentials = { username, password }
-    const { data } = await mutate({ variables: credentials })
+  const signIn = async (creds: Credentials) => {
+
+    const { data } = await mutate({ variables: creds })
      localStorage.setItem('socialPlatformUserToken', data.login.value)
 
     apolloClient.resetStore()
@@ -18,7 +18,7 @@ const useSignIn = () => {
     return data
   };
 
-  return { signIn, result };
+  return { signIn, result};
 };
 
 export default useSignIn

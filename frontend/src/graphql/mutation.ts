@@ -20,3 +20,13 @@ mutation Mutation($content: String!) {
   }
 }
 `
+
+export const SIGN_UP = gql`
+mutation AddUser($username: String!, $name: String!, $password: String!) {
+  addUser(username: $username, name: $name, password: $password) {
+    id
+    username
+    name
+  }
+}
+`
