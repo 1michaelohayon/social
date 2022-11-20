@@ -18,10 +18,6 @@ Message.init({
     allowNull: true,
     defaultValue: 0,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  }
 }, {
   sequelize,
   underscored: true,

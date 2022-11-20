@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev index.ts",
+    "migrate:down": "ts-node-dev ./utils/rollback.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Ohayon",

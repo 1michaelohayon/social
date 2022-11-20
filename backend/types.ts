@@ -26,3 +26,9 @@ export interface NewUser {
 export interface NewMessage {
   content: string,
 }
+
+export interface MessageSchema {
+  id: number,
+  content: string,
+  likes: number
+}

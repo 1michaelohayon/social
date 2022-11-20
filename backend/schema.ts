@@ -54,6 +54,9 @@ type Mutation {
     password: String!
   ): Token
 
+  addLike(
+     messageId: Int!
+  ): Message
 }
 
 `

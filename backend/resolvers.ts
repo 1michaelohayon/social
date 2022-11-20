@@ -1,14 +1,13 @@
-import Message from "./models/message"
-import User from "./models/user"
+import models from "./models"
 import { AuthenticationError, UserInputError } from "apollo-server-core"
 import jwt from "jsonwebtoken"
 import config from "./utils/config"
 import bcrypt from "bcrypt"
 import { NewUser, NewMessage, Credentials, UserContext } from "./types"
 import { PubSub } from "graphql-subscriptions"
-
 const pubsub = new PubSub()
 
+const { User, Message, likedMessages } = models;
 
 const resolvers = {
   Query: {
@@ -64,8 +63,28 @@ const resolvers = {
       return message
     },
 
-    addUser: async (_root: undefined, args: NewUser) => {
+    addLike: async (_root: undefined, args: { messageId: number }, context: UserContext) => {
 
+      if (!context.currentUser) {
+        throw new AuthenticationError("Not logged in")
+
+      }
+      const message: any = await Message.findByPk(args.messageId)
+      if (!message) {
+        throw new UserInputError("Message not found")
+      }
+      try {
+       await likedMessages.create({ messageId: args.messageId, userId: context.currentUser.id })
+        message.likes = message.likes + 1
+        const saved = message.save()
+
+        return await saved
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    addUser: async (_root: undefined, args: NewUser) => {
       const passwordHash = await bcrypt.hash(args.password, 10)
       const newUser = {
         username: args.username,
