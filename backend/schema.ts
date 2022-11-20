@@ -1,11 +1,17 @@
 import { gql } from "apollo-server";
 
-
 const typeDefs = gql`
 type User {
   id: ID!
   username: String!
   name: String!
+  messages: [Message!]!
+  likedMessages: [LikedMessages!]!
+}
+
+type LikedMessages {
+  user: User!
+  message: Message!
 }
 
 type Message {
@@ -13,6 +19,8 @@ type Message {
   content: String!
   likes: Int!
   userId: Int!
+  user: User!
+  likedBy: [LikedMessages!]!
 }
 
 type Token { 

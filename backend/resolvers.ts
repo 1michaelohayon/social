@@ -18,11 +18,20 @@ const resolvers = {
     messagesCount: async () => Message.count(),
 
     allMessages: async () => {
-      return Message.findAll()
-
+       const messages = await Message.findAll({ include: [
+        { model: User, as: "user" },
+        { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
+      ] })
+      console.log(messages)
+      return messages
     },
     allUsers: async () => {
-      return User.findAll()
+      const users = await User.findAll({ include: [
+        { model: likedMessages, include: [{ model: Message, as: "message" }] },
+      ] })
+      console.log(users);
+     
+      return users
     }
   },
 
@@ -74,7 +83,7 @@ const resolvers = {
         throw new UserInputError("Message not found")
       }
       try {
-       await likedMessages.create({ messageId: args.messageId, userId: context.currentUser.id })
+        await likedMessages.create({ messageId: args.messageId, userId: context.currentUser.id })
         message.likes = message.likes + 1
         const saved = message.save()
 
