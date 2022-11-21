@@ -14,16 +14,35 @@ subscription Subscription {
 `
 
 export const GET_MESSAGES = gql`
-query AllMessages {
-  allMessages {
-    content
-    id
-    likes
-    user {
-      id
+query Query($after: String) {
+  allMessages(after: $after) {
+    edges {
+      node {
+        id
+        content
+        likes
+        likedBy {
+          user {
+            id
+            name
+          }
+        }
+        user {
+          name
+        }
+      }
+      cursor
+    }
+    totalCount
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
     }
   }
 }
+
 `
 
 

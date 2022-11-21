@@ -10,8 +10,8 @@ type User {
 }
 
 type LikedMessages {
-  user: User!
-  message: Message!
+  user: User
+  message: Message
 }
 
 type Message {
@@ -31,14 +31,32 @@ type Subscription {
   messageAdd: Message!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String!
+  endCursor: String!
+}
 
+type Edge {
+  cursor: String!
+  node: Message!
+}
+
+type MessageConnection {
+  edges: [Edge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
 
 
 type Query {
   usersCount: Int!
   messagesCount: Int!
   me: User
-  allMessages: [Message!]
+  allMessages(
+    after: String
+  ): MessageConnection!
   allUsers: [User!]
 }
 

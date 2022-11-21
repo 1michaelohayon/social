@@ -1,16 +1,13 @@
 
 import useMessages from "../hooks/useMessages;"
-import { Message } from "../types"
 import SingleMessage from "./SingleMessage"
-
+import cooldown from "../utils/cooldown"
 import useMessageSubscribe from "../hooks/useMessageSubscribe"
 
 const MessagesList = () => {
   const subscribe = useMessageSubscribe()
 
-  const { messages, loading } = useMessages()
-
-
+  const { messages, loading, fetchMore } = useMessages()
 
 
   if (loading) {
@@ -19,14 +16,14 @@ const MessagesList = () => {
     return <div>no messages..</div>
   }
 
+  const nodes = messages.edges
+  const messageList = nodes.map((edge: any) => <SingleMessage key={edge.node.id} message={edge.node} />)
 
-  const messageList = messages.map((msg: Message) => <SingleMessage key={msg.id} message={msg} />)
 
-  
   return <div>
     {subscribe.newMessages.map(message => <SingleMessage key={message.id} message={message} />)}
     {messageList}
-
+    <button onClick={() => fetchMore()}>Load more</button>
   </div>
 }
 

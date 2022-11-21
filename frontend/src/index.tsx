@@ -4,6 +4,7 @@ import App from './App';
 import { setContext } from '@apollo/client/link/context'
 import { getMainDefinition } from '@apollo/client/utilities'
 
+import { relayStylePagination } from '@apollo/client/utilities';
 import { createClient } from 'graphql-ws';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import {
@@ -42,7 +43,15 @@ const splitLink = split(
 )
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          allMessages: relayStylePagination()
+        }
+      }
+    }
+  }),
   link: splitLink
 })
 

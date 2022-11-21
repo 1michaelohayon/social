@@ -17,13 +17,20 @@ const resolvers = {
     usersCount: async () => User.count(),
     messagesCount: async () => Message.count(),
 
-    allMessages: async () => {
-       const messages = await Message.findAll({ include: [
-        { model: User, as: "user" },
-        { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
-      ] })
+
+    allMessages: async (_root: undefined, args: { after: string}) => {
+      const messages = await Message.paginate({
+        include: [
+          { model: User, as: "user" },
+          { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
+        ],
+        limit: 5,
+        after: args.after,
+      })
       return messages
     },
+
+
     allUsers: async () => {
       const users = await User.findAll({ include: [
         { model: likedMessages, include: [{ model: Message, as: "message" }] },
