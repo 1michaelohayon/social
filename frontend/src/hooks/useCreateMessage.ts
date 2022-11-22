@@ -11,7 +11,7 @@ const useCreateMessage = () => {
     return data
   };
 
-  return { addMessage, result };
+  return { addMessage, result, loading: result.loading };
 };
 
 export default useCreateMessage

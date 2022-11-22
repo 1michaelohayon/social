@@ -52,6 +52,8 @@ query Me {
     id
     name
     username
+    profileName
+    profilePicture
     likedMessages {
       message {
         id
@@ -61,11 +63,39 @@ query Me {
 }
 `
 
-export const GET_USER_LIKED_MESSAGES = gql`
-query Me {
-  me {
-    likedMessages {
-      messageId
+export const EDIT_USER = gql`
+mutation Mutation($profileName: String) {
+  editUser(profileName: $profileName) {
+    profileName
+    username
+    profilePicture
+    name
+    id
+  }
+}
+`
+
+
+export const FIND_USER = gql`
+query Query($profileName: String!) {
+  findUser(profileName: $profileName) {
+    id
+    username
+    name
+    profileName
+    profilePicture
+    messages {
+      content
+      id
+      likes
+      likedBy {
+        user {
+          id
+          name
+          profileName
+          profilePicture
+        }
+      }
     }
   }
 }

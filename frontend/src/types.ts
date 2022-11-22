@@ -40,5 +40,7 @@ export interface User {
   id: number,
   username: string,
   name: string,
+  profileName: string,
+  profilePicture?: string
   likedMessages: [likedMessaged]
 }

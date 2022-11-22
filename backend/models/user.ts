@@ -21,10 +21,19 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  passwordHash:{
+  passwordHash: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
+  pictureUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  profileName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
 }, {
   sequelize,
   underscored: true,

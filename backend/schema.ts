@@ -5,8 +5,10 @@ type User {
   id: ID!
   username: String!
   name: String!
-  messages: [Message!]!
-  likedMessages: [LikedMessages!]!
+  messages: [Message!]
+  likedMessages: [LikedMessages!]
+  profileName: String!
+  profilePicture: String
 }
 
 type LikedMessages {
@@ -20,7 +22,7 @@ type Message {
   likes: Int!
   userId: Int!
   user: User!
-  likedBy: [LikedMessages!]!
+  likedBy: [LikedMessages!]
 }
 
 type Token { 
@@ -52,12 +54,20 @@ type MessageConnection {
 
 type Query {
   usersCount: Int!
+
   messagesCount: Int!
+
   me: User
+
   allMessages(
     after: String
   ): MessageConnection!
+
   allUsers: [User!]
+
+  findUser(
+    profileName: String!
+  ): User
 }
 
 
@@ -79,6 +89,11 @@ type Mutation {
     username: String!
     password: String!
   ): Token
+
+ editUser(
+    profileName: String
+    profilePicture: String
+  ): User
 
   addLike(
      messageId: Int!

@@ -18,7 +18,7 @@ const resolvers = {
     messagesCount: async () => Message.count(),
 
 
-    allMessages: async (_root: undefined, args: { after: string}) => {
+    allMessages: async (_root: undefined, args: { after: string }) => {
       const messages = await Message.paginate({
         include: [
           { model: User, as: "user" },
@@ -32,14 +32,29 @@ const resolvers = {
 
 
     allUsers: async () => {
-      const users = await User.findAll({ include: [
-        { model: likedMessages, include: [{ model: Message, as: "message" }] },
-      ] })
-     
-      return users
-    }
-  },
+      const users = await User.findAll({
+        include: [
+          { model: Message},
+          { model: likedMessages, include: [{ model: Message, as: "message" }] },
+        ]
+      })
 
+      return users
+    },
+
+    findUser: async (_root: undefined, args: { profileName: string }) => {
+      const user = await User.findOne({
+        where: { profileName: args.profileName },
+        include: [
+          { model: Message},
+        ]
+      })
+      if (!user) {
+        throw new UserInputError("User not found")
+      }
+      return user
+    },
+  },
 
   Mutation: {
     login: async (_root: undefined, args: Credentials) => {
@@ -100,15 +115,34 @@ const resolvers = {
 
     addUser: async (_root: undefined, args: NewUser) => {
       const passwordHash = await bcrypt.hash(args.password, 10)
+      const profileName = args.profileName ? args.profileName : args.username
       const newUser = {
         username: args.username,
         name: args.name,
         passwordHash: passwordHash,
+        profileName: profileName,
         createdAt: new Date(),
         updatedAt: new Date()
       }
       return await User.create(newUser)
     },
+
+    editUser: async (_root: undefined, args: {profileName: string, pictureUrl: string}, context: UserContext) => {
+      if (!context.currentUser) {
+        throw new AuthenticationError("Not logged in")
+      }
+      const user = await User.findByPk(context.currentUser.id)
+      if (!user) {
+        throw new UserInputError("User not found")
+      }
+      
+      const updatedUser = {
+        profileName: args.profileName,
+        pictureUrl: args.pictureUrl,
+        updatedAt: new Date()
+      }
+      return await user.update(updatedUser)
+    }
   },
   Subscription: {
     messageAdd: {
