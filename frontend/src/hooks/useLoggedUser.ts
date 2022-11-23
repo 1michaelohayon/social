@@ -11,7 +11,6 @@ const useLoggedUser = () => {
   const loading = response.loading;
 
   const fetchLoggedUser = async () => {
-    console.log('Logged:', response.data.me);
     if (response.data) {
       setLoggedUser(response.data.me)
     }

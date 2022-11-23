@@ -36,17 +36,13 @@ export interface Message {
   likedBy?: likedMessage[]
 }
 
-export interface Follower {
-  userId: number,
-  followerId: number
-}
 
 
 export interface likedMessage {
   message?: Message;
   user?: User;
 }
-export interface FollowerSchema {
+export interface Follower {
   userId?: number,
   followerId?: number
 }
@@ -62,7 +58,7 @@ export interface User {
   passwordHash: string,
   messages?: Message[],
   likedMessages?: likedMessage[],
-  followers?: FollowerSchema[],
-  following?: FollowerSchema[]
+  followers?: Follower[],
+  following?: Follower[]
 
 }

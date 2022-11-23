@@ -16,8 +16,8 @@ const SignIn = () => {
     try {
       const creds: Credentials = { username: username.input.value, password: password.input.value }
       await signIn(creds);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   }
 

@@ -10,7 +10,6 @@ const useMessageSubscribe = () => {
         const messages = newMessages.concat(data.data.messageAdd);
         setNewMessages(messages);
       }
-      console.log(data.data.messageAdd)
     }
   })
 

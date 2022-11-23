@@ -45,3 +45,12 @@ mutation Mutation($profileName: String) {
   ${USER}
 }
 `
+
+export const FOLLOW_USER = gql`
+mutation Mutation($userId: Int!) {
+  follow(userId: $userId) {
+    followerId
+    userId
+  }
+}
+`
