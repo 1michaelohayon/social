@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { EDIT_USER } from "../graphql/queries";
+import { EDIT_USER } from "../graphql/mutation";
 
 const useEditUser = () => {
   const [mutate, result] = useMutation(EDIT_USER);

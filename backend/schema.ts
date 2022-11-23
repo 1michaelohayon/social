@@ -1,5 +1,7 @@
 import { gql } from "apollo-server";
 
+
+
 const typeDefs = gql`
 type User {
   id: ID!
@@ -9,6 +11,13 @@ type User {
   likedMessages: [LikedMessages!]
   profileName: String!
   profilePicture: String
+  followers: [Followers!]
+  following: [Followers!]
+}
+
+type Followers {
+  userId: Int!
+  followerId: Int!
 }
 
 type LikedMessages {
@@ -98,6 +107,11 @@ type Mutation {
   addLike(
      messageId: Int!
   ): Message
+
+  follow(
+    userId: Int!
+  ): Followers
+  
 }
 
 `

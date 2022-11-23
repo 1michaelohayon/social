@@ -2,6 +2,7 @@ import useAddLike from "../hooks/useAddLike"
 import { Message } from "../types"
 import { useContext, useState } from "react"
 import { UserContext } from "../App"
+import {User, likedMessage} from "../types"
 interface Props {
   message: Message,
 }
@@ -14,10 +15,12 @@ const SingleMessage = ({ message }: Props) => {
   const { content, likes } = message
   const [updatedLikes, setUpdatedLikes] = useState(likes)
 
+  const user: User | null = logged
 
-  const alreadyLiked = (id: number): boolean => logged.likedMessages.some((lm: any) => lm.message.id === message.id)
 
-  
+  const alreadyLiked = () => message.likedBy?.some((lm: likedMessage) => lm.user?.id === user?.id)
+
+
   const handleLike = () => {
     try {
       likeMessage(message.id)
@@ -31,7 +34,7 @@ const SingleMessage = ({ message }: Props) => {
 
 
   return <div style={{paddingTop: 50, paddingBottom: 50, textAlign: "center", border: "solid", margin: 30}}>
-    {content} {updatedLikes} {!logged ? null : liked || alreadyLiked(logged) ? "liked!" : <button onClick={handleLike}>like!</button>}
+    {content} {updatedLikes} {!user ? null : liked || alreadyLiked() ? "liked!" : <button onClick={handleLike}>like!</button>}
 
   </div>
 }

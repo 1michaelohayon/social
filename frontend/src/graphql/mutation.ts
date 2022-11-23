@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-
+import { MESSAGE, USER } from './fragments';
 
 export const SIGN_IN = gql`
 mutation Mutation($username: String!, $password: String!) {
@@ -13,31 +13,35 @@ mutation Mutation($username: String!, $password: String!) {
 export const ADD_MESSAGE = gql`
 mutation Mutation($content: String!) {
   addMessage(content: $content) {
-    id
-    content
-    likes
-    userId
+    ...Message
   }
 }
+${MESSAGE}
 `
 
 export const SIGN_UP = gql`
 mutation AddUser($username: String!, $name: String!, $password: String!) {
   addUser(username: $username, name: $name, password: $password) {
-    id
-    username
-    name
+    ...User
   }
 }
+${USER}
 `
 
 export const ADD_LIKE =gql`
 mutation AddLike($messageId: Int!) {
   addLike(messageId: $messageId) {
-    id
-    content
-    likes
-    userId
+    ...Message
   }
+}
+${MESSAGE}
+`
+
+export const EDIT_USER = gql`
+mutation Mutation($profileName: String) {
+  editUser(profileName: $profileName) {
+    ...User
+  }
+  ${USER}
 }
 `

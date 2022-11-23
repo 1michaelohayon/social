@@ -4,7 +4,10 @@ import jwt from "jsonwebtoken"
 import config from "./utils/config"
 import bcrypt from "bcrypt"
 import { NewUser, NewMessage, Credentials, UserContext } from "./types"
+import follower from "./models/follower"
 import { PubSub } from "graphql-subscriptions"
+
+
 const pubsub = new PubSub()
 
 const { User, Message, likedMessages } = models;
@@ -34,8 +37,10 @@ const resolvers = {
     allUsers: async () => {
       const users = await User.findAll({
         include: [
-          { model: Message},
+          { model: Message },
           { model: likedMessages, include: [{ model: Message, as: "message" }] },
+          { model: follower, as: "following"},
+          { model: follower, as: "followers"},
         ]
       })
 
@@ -46,7 +51,10 @@ const resolvers = {
       const user = await User.findOne({
         where: { profileName: args.profileName },
         include: [
-          { model: Message},
+          { model: Message },
+          { model: likedMessages, include: [{ model: Message, as: "message" }] },
+          { model: follower, as: "following"},
+          { model: follower, as: "followers"},
         ]
       })
       if (!user) {
@@ -113,6 +121,18 @@ const resolvers = {
       }
     },
 
+
+    follow: async (_root: undefined, args: { userId: number }, context: UserContext) => {
+      if (!context.currentUser) {
+        throw new AuthenticationError("Not logged in")
+      }
+      const newFollow = {
+        followerId: context.currentUser.id,
+        userId: args.userId
+      }
+      return await follower.create(newFollow)
+    },
+
     addUser: async (_root: undefined, args: NewUser) => {
       const passwordHash = await bcrypt.hash(args.password, 10)
       const profileName = args.profileName ? args.profileName : args.username
@@ -127,7 +147,7 @@ const resolvers = {
       return await User.create(newUser)
     },
 
-    editUser: async (_root: undefined, args: {profileName: string, pictureUrl: string}, context: UserContext) => {
+    editUser: async (_root: undefined, args: { profileName: string, pictureUrl: string }, context: UserContext) => {
       if (!context.currentUser) {
         throw new AuthenticationError("Not logged in")
       }
@@ -135,7 +155,7 @@ const resolvers = {
       if (!user) {
         throw new UserInputError("User not found")
       }
-      
+
       const updatedUser = {
         profileName: args.profileName,
         pictureUrl: args.pictureUrl,

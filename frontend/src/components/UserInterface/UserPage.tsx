@@ -12,11 +12,15 @@ const UserPage = () => {
   if (loading) return <div>Loading...</div>
   if (!user) return <div>User not found</div>
 
-
+console.log(user)
   return <div>
     user: {user.profileName}
     <br/>
     name: {user.name}
+    <br/>
+    following: {user.following.length}
+    <br/>
+    followers: {user.followers.length}
 
     {user.messages
       ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)

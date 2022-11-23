@@ -1,16 +1,14 @@
 import { gql } from '@apollo/client';
-
+import { MESSAGE, USER } from './fragments';
 
 
 export const MESSAGE_ADDED = gql`
 subscription Subscription {
   messageAdd {
-    content
-    id
-    likes
-    userId
+    ...Message
   }
 }
+${MESSAGE}
 `
 
 export const GET_MESSAGES = gql`
@@ -18,17 +16,14 @@ query Query($after: String) {
   allMessages(after: $after) {
     edges {
       node {
-        id
-        content
-        likes
+        ...Message
         likedBy {
           user {
-            id
-            name
+            ...User
           }
         }
         user {
-          name
+         ...User
         }
       }
       cursor
@@ -42,61 +37,44 @@ query Query($after: String) {
     }
   }
 }
-
+${MESSAGE}
+${USER}
 `
 
 
 export const GET_LOGGED_USER = gql`
 query Me {
   me {
-    id
-    name
-    username
-    profileName
-    profilePicture
+    ...User
     likedMessages {
       message {
-        id
+        ...Message
       }
     }
   }
 }
+${USER}
+${MESSAGE}
 `
 
-export const EDIT_USER = gql`
-mutation Mutation($profileName: String) {
-  editUser(profileName: $profileName) {
-    profileName
-    username
-    profilePicture
-    name
-    id
-  }
-}
-`
+
 
 
 export const FIND_USER = gql`
 query Query($profileName: String!) {
   findUser(profileName: $profileName) {
-    id
-    username
-    name
-    profileName
-    profilePicture
+    ...User
     messages {
-      content
-      id
-      likes
-      likedBy {
-        user {
-          id
-          name
-          profileName
-          profilePicture
-        }
-      }
+      ...Message
+    }
+    followers {
+      followerId
+    }
+    following {
+      userId
     }
   }
 }
+${USER}
+${MESSAGE}
 `
