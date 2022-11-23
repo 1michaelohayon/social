@@ -11,7 +11,13 @@ const useCreateMessage = () => {
     return data
   };
 
-  return { addMessage, result, loading: result.loading };
+
+  const reply = async (content: string, reply: number) => {
+    const { data } = await mutate({ variables: { content, reply } })
+    return data
+  }
+
+  return { addMessage, reply, result, loading: result.loading };
 };
 
 export default useCreateMessage

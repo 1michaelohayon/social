@@ -31,6 +31,7 @@ type Message {
   likes: Int!
   userId: Int!
   user: User!
+  reply: Int
   likedBy: [LikedMessages!]
 }
 
@@ -77,6 +78,10 @@ type Query {
   findUser(
     profileName: String!
   ): User
+
+  findReplies(
+    messageId: Int!
+  ): [Message!]
 }
 
 
@@ -86,6 +91,7 @@ type Query {
 type Mutation {
   addMessage(
     content: String!
+    reply: Int
   ): Message
 
   addUser(

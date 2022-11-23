@@ -11,8 +11,8 @@ mutation Mutation($username: String!, $password: String!) {
 
 
 export const ADD_MESSAGE = gql`
-mutation Mutation($content: String!) {
-  addMessage(content: $content) {
+mutation Mutation($content: String!, $reply: Int) {
+  addMessage(content: $content, reply: $reply) {
     ...Message
   }
 }

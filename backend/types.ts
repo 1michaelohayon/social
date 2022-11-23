@@ -26,6 +26,7 @@ export interface NewUser {
 
 export interface NewMessage {
   content: string,
+  reply?: number
 }
 
 export interface LikedMessagesSchema {
@@ -38,7 +39,7 @@ export interface FollowerSchema {
   followerId: number
 }
 
-export interface UserSchema{
+export interface UserSchema {
   id: number,
   username: string,
   name: string,
@@ -65,4 +66,6 @@ export interface MessageSchema {
   userId: number,
   user: UserSchema
   likedBy?: LikedMessagesSchema[]
+
+  reply?: number
 }

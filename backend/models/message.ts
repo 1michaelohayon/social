@@ -25,6 +25,11 @@ Message.init({
     allowNull: true,
     defaultValue: 0,
   },
+  reply: {
+    type: DataTypes.INTEGER,
+    references: { model: 'messages', key: 'id' },
+    allowNull: true,
+  }
 }, {
   sequelize,
   underscored: true,

@@ -23,7 +23,7 @@ const SingleMessage = ({ message }: Props) => {
 
   const handleLike = () => {
     try {
-      likeMessage(message.id)
+      likeMessage(Number(message.id))
       setLiked(true)
       setUpdatedLikes(likes + 1)
     } catch (error) {

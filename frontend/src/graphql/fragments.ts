@@ -5,6 +5,7 @@ export const MESSAGE = gql`
     id
     content
     likes
+    reply
   }
 `
 

@@ -5,7 +5,7 @@ const useAddLike = () => {
   const [mutate, result,] = useMutation(ADD_LIKE);
 
   const likeMessage = async (messageId: number) => {
-    const { data } = await mutate({ variables: { messageId: Number(messageId) } })
+    const { data } = await mutate({ variables: { messageId: messageId } })
     return data
   };
 

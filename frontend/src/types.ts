@@ -26,7 +26,7 @@ export interface NewUser {
 }
 
 export interface Message { 
-   id: number,
+   id: string,
   content: string,
   likes: number
   createdAt: Date,
@@ -34,6 +34,8 @@ export interface Message {
   userId: number,
   user: User
   likedBy?: likedMessage[]
+  reply?: number
+
 }
 
 

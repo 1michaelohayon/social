@@ -5,6 +5,8 @@ import { createContext } from "react";
 import useLoggedUser from './hooks/useLoggedUser';
 import UserPage from './components/UserInterface/UserPage';
 import UserSettings from './components/UserInterface/UserSettings';
+import MessagePage from './components/MessagePage';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,6 +28,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/settings" element={<UserSettings />} />
+          <Route path="/message/*" element={<MessagePage />} />
           <Route path="/*" element={<UserPage />} />
 
         </Routes>

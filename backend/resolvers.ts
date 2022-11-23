@@ -6,6 +6,7 @@ import bcrypt from "bcrypt"
 import { NewUser, NewMessage, Credentials, UserContext } from "./types"
 import follower from "./models/follower"
 import { PubSub } from "graphql-subscriptions"
+import { Op } from "sequelize"
 
 
 const pubsub = new PubSub()
@@ -32,15 +33,21 @@ const resolvers = {
       })
       return messages
     },
-
+    findReplies: async (_root: undefined, args: { messageId: number }) => await Message.findAll({
+      where: { [Op.or]: [{ reply: args.messageId }, { id: args.messageId }] },
+      include: [
+        { model: User, as: "user" },
+        { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
+      ],
+    }),
 
     allUsers: async () => {
       const users = await User.findAll({
         include: [
           { model: Message },
           { model: likedMessages, include: [{ model: Message, as: "message" }] },
-          { model: follower, as: "following"},
-          { model: follower, as: "followers"},
+          { model: follower, as: "following" },
+          { model: follower, as: "followers" },
         ]
       })
 
@@ -53,8 +60,8 @@ const resolvers = {
         include: [
           { model: Message },
           { model: likedMessages, include: [{ model: Message, as: "message" }] },
-          { model: follower, as: "following"},
-          { model: follower, as: "followers"},
+          { model: follower, as: "following" },
+          { model: follower, as: "followers" },
         ]
       })
       if (!user) {
@@ -89,12 +96,17 @@ const resolvers = {
       if (!context.currentUser) {
         throw new AuthenticationError("Not logged in")
       }
-      const newMessage = {
+      let newMessage = {
         content: args.content,
         userId: context.currentUser.id,
         createdAt: new Date(),
         updatedAt: new Date()
       }
+      if (args.reply) {
+        const reply = { ...newMessage, reply: args.reply }
+        newMessage = reply
+      }
+
       const message = await Message.create(newMessage)
       await pubsub.publish("MESSAGE_ADDED", { messageAdd: message })
       return message

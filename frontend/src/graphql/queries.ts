@@ -78,3 +78,21 @@ query Query($profileName: String!) {
 ${USER}
 ${MESSAGE}
 `
+
+export const FIND_REPLIES = gql`
+query Query($messageId: Int!) {
+  findReplies(messageId: $messageId) {
+    ...Message
+    likedBy {
+      user {
+        ...User
+      }
+    }
+    user {
+      ...User
+    }
+  }
+}
+${USER}
+${MESSAGE}
+`
