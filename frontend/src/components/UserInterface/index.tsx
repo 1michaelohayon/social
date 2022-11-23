@@ -1,7 +1,7 @@
 import { useApolloClient } from "@apollo/client";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import Togglable from "../Toggleable";
+import Togglable from "../Togglable";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import { useContext } from "react";

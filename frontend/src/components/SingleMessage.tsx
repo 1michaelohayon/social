@@ -2,7 +2,10 @@ import useAddLike from "../hooks/useAddLike"
 import { Message } from "../types"
 import { useContext, useState } from "react"
 import { UserContext } from "../App"
-import {User, likedMessage} from "../types"
+import { User, likedMessage } from "../types"
+import ReplyForm from "./ReplyForm"
+import Togglable from "./Togglable"
+
 interface Props {
   message: Message,
 }
@@ -14,7 +17,6 @@ const SingleMessage = ({ message }: Props) => {
   const { likeMessage } = useAddLike()
   const { content, likes } = message
   const [updatedLikes, setUpdatedLikes] = useState(likes)
-
   const user: User | null = logged
 
 
@@ -33,8 +35,11 @@ const SingleMessage = ({ message }: Props) => {
 
 
 
-  return <div style={{paddingTop: 50, paddingBottom: 50, textAlign: "center", border: "solid", margin: 30}}>
+  return <div style={{ paddingTop: 50, paddingBottom: 50, textAlign: "center", border: "solid", margin: 30 }}>
     {content} {updatedLikes} {!user ? null : liked || alreadyLiked() ? "liked!" : <button onClick={handleLike}>like!</button>}
+    <br />
+    <Togglable children={ <ReplyForm replyTo={Number(message.id)} />} buttonLabel="reply" />
+     
 
   </div>
 }

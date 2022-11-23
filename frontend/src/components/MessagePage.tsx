@@ -14,11 +14,7 @@ const MessagePage = () => {
 
 
 
-  console.log("messages", messages);
 
-
-  console.log("message", messages);
-  console.log("replies", replies);
   if (!messages || !message) return <div>not found</div>
 
   return <div>

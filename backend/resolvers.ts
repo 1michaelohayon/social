@@ -29,6 +29,7 @@ const resolvers = {
           { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
         ],
         limit: 5,
+        order: [['createdAt', 'DESC']],
         after: args.after,
       })
       return messages
