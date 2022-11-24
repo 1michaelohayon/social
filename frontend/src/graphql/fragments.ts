@@ -15,6 +15,6 @@ export const USER = gql`
     name
     username
     profileName
-    profilePicture
+    pictureUrl
   }
 `

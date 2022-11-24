@@ -1,9 +1,10 @@
 
-import useMessages from "../hooks/useMessages;"
+import useMessages from "../../hooks/useMessages;"
 import SingleMessage from "./SingleMessage"
-import useMessageSubscribe from "../hooks/useMessageSubscribe"
+import useMessageSubscribe from "../../hooks/useMessageSubscribe"
 import { useEffect } from "react"
-import { Edge } from "../types"
+import { Edge } from "../../types"
+import Loading from "../Loading"
 
 const MessagesList = () => {
   const subscribe = useMessageSubscribe()
@@ -23,7 +24,7 @@ const MessagesList = () => {
 
 
   if (loading) {
-    return <div>loading...</div>
+    return <Loading />
   } else if (!messages) {
     return <div>no messages..</div>
   }

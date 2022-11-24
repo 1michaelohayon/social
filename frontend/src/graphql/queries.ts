@@ -96,3 +96,21 @@ query Query($messageId: Int!) {
 ${USER}
 ${MESSAGE}
 `
+
+export const SEARCH_MESSAGES = gql`
+query Query($search: String!) {
+  searchMessages(search: $search) {
+    ...Message
+    user {
+      ...User
+    }
+    likedBy {
+      user {
+        ...User
+      }
+    }
+  }
+}
+${MESSAGE}
+${USER}
+`

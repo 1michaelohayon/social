@@ -1,15 +1,23 @@
 import useSignIn from "../../hooks/useSignIn"
 import useField from "../../hooks/useField"
 import { Credentials } from "../../types"
+import Loading from "../Loading"
+import { Container, Input, Button } from "../../theme/signin"
 
-const SignIn = () => {
+const SignIn = ({ show, setShow}: { show: boolean, setShow: any }) => {
   const username = useField('text')
   const password = useField('password')
   const { signIn, result } = useSignIn();
+  if (!show) {
+    document.body.style.overflow = "visible"
+    return null
+  } else {
+    document.body.style.overflow = "hidden"
+  }
 
-  if (result.loading) { return <div>loading...</div> }
+  if (result.loading) { return <Loading /> }
 
-  
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -21,14 +29,19 @@ const SignIn = () => {
     }
   }
 
+
+
+
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit}>
-        <input {...username.input} placeholder="email" />
-        <input {...password.input} placeholder="password" />
-        <button type="submit">LOGIN!</button>
+        <Input {...username.input} placeholder="email" />
+        <Input {...password.input} placeholder="password" />
+        <br />
+        <Button type="submit">Sign In</Button>
+        <Button onClick={()=> setShow(false)}>cancel</Button>
       </form>
-    </div>
+    </Container>
   )
 }
 

@@ -1,5 +1,5 @@
-import MessagesList from "./MessagesList"
-import MessageForm from "./MessageForm"
+import MessagesList from "./Messages/MessagesList"
+import MessageForm from "./Messages/MessageForm"
 
 const Main = () => {
 

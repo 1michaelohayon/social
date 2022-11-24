@@ -10,7 +10,7 @@ type User {
   messages: [Message!]
   likedMessages: [LikedMessages!]
   profileName: String!
-  profilePicture: String
+  pictureUrl: String
   followers: [Followers!]
   following: [Followers!]
 }
@@ -82,6 +82,10 @@ type Query {
   findReplies(
     messageId: Int!
   ): [Message!]
+
+  searchMessages(
+    search: String!
+  ): [Message!]
 }
 
 
@@ -107,7 +111,7 @@ type Mutation {
 
  editUser(
     profileName: String
-    profilePicture: String
+    pictureUrl: String
   ): User
 
   addLike(

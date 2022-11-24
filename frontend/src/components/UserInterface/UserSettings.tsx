@@ -1,5 +1,7 @@
 import useEditUser from "../../hooks/useEditUser"
 import useField from "../../hooks/useField"
+import Loading from "../Loading"
+
 
 const UserSettings = () => {
   const { editUser, loading } = useEditUser()
@@ -30,7 +32,7 @@ const UserSettings = () => {
       <p>edit profile</p>
       <input {...profileName.input} placeholder="profile name" />
       <input {...pictureUrl.input} placeholder="profile picture url" />
-      {loading ? <div>loading...</div> : <button type="submit">Save</button>}
+      {loading ? <Loading /> : <button type="submit">Save</button>}
     </form>
   </div>
 }

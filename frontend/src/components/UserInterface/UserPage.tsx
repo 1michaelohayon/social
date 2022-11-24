@@ -2,11 +2,13 @@
 import { useMatch } from "react-router-dom"
 import useFindUser from "../../hooks/useFindUser";
 import { Message, Follower } from "../../types";
-import SingleMessage from "../SingleMessage";
+import SingleMessage from "../Messages/SingleMessage";
 import useFollow from "../../hooks/useFollow";
 import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useState } from "react";
+import Loading from "../Loading";
+
 
 const UserPage = () => {
   const match = useMatch("/:profileName")
@@ -16,7 +18,7 @@ const UserPage = () => {
   const { logged } = useContext(UserContext);
   const [following, setFollowing] = useState(false)
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loading />
   if (!user) return <div>User not found</div>
 
 
@@ -32,7 +34,7 @@ const UserPage = () => {
         {following || (user.followers.some((f: Follower) => f.followerId === Number(logged.id)))
           ? <div>Following</div>
           : result.loading
-            ? <div>loading...</div>
+            ? <Loading />
             : <button onClick={handleFollow}>Follow</button>}
 
         <br />
@@ -59,14 +61,16 @@ const UserPage = () => {
     <br />
     {loggedInterface()}
 
-    {user.messages
-      ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
-      : <div>no messages</div>}
+
   </div>
 }
 
 export default UserPage
 
 
-
+/*
+    {user.messages
+      ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
+      : <div>no messages</div>}
+      */
 

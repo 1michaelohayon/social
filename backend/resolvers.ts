@@ -42,6 +42,15 @@ const resolvers = {
       ],
     }),
 
+    searchMessages: async (_root: undefined, args: { search: string }) => await Message.findAll({
+      where: { content: { [Op.iLike]: `%${args.search}%` } },
+      include: [
+        { model: User, as: "user" },
+        { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
+      ],
+      limit: 5,
+    }),
+
     allUsers: async () => {
       const users = await User.findAll({
         include: [

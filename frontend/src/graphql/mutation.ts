@@ -38,12 +38,12 @@ ${MESSAGE}
 `
 
 export const EDIT_USER = gql`
-mutation Mutation($profileName: String) {
-  editUser(profileName: $profileName) {
+mutation Mutation($profileName: String $pictureUrl: String) {
+  editUser(profileName: $profileName pictureUrl: $pictureUrl) {
     ...User
   }
-  ${USER}
 }
+${USER}
 `
 
 export const FOLLOW_USER = gql`

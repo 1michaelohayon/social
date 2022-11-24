@@ -1,5 +1,7 @@
-import useField from "../hooks/useField"
-import useCreateMessage from "../hooks/useCreateMessage"
+import useField from "../../hooks/useField"
+import useCreateMessage from "../../hooks/useCreateMessage"
+import Loading from "../Loading"
+
 
 const MessageForm = () => {
   const content = useField("text")
@@ -16,7 +18,7 @@ const MessageForm = () => {
     <form onSubmit={handleSubmit}>
       <p>new message</p>
       <input {...content.input} />
-      {loading ? <div>loading...</div> : <button type="submit">Send</button>}
+      {loading ? <Loading /> : <button type="submit">Send</button>}
     </form>
   </div>
 

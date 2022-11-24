@@ -2,15 +2,22 @@ import useField from "../../hooks/useField"
 import useSignUp from "../../hooks/useSignUp"
 import useSignIn from "../../hooks/useSignIn"
 import { NewUser, Credentials } from "../../types"
+import { Container, Input, Button } from "../../theme/signin"
 
-const SignUp = () => {
+
+const SignUp = ({ show, setShow}: { show: boolean, setShow: any }) => {
   const { signUp } = useSignUp()
   const { signIn } = useSignIn()
   const username = useField('text')
   const name = useField('text')
   const password = useField('password')
   const passwordConfirm = useField('password')
-
+  if (!show) {
+    document.body.style.overflow = "visible"
+    return null
+  } else {
+    document.body.style.overflow = "hidden"
+  }
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,15 +51,16 @@ const SignUp = () => {
 
 
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit}>
-        <input {...username.input} placeholder="email" />
-        <input {...name.input} placeholder="name" />
-        <input {...password.input} placeholder="password" />
-        <input {...passwordConfirm.input} placeholder="password confirm" />
-        <button type="submit">SIGN UP!</button>
+        <Input {...username.input} placeholder="email" />
+        <Input {...name.input} placeholder="name" />
+        <Input {...password.input} placeholder="password" />
+        <Input {...passwordConfirm.input} placeholder="password confirm" />
+        <Button type="submit">Sign Up</Button>
+        <Button onClick={()=> setShow(false)}>cancel</Button>
       </form>
-    </div>
+    </Container>
   )
 }
 
