@@ -8,6 +8,17 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useState } from "react";
 import Loading from "../Loading";
+import {
+  TopContainer,
+  MiddleContainer,
+  BottomContainer,
+  ProfileImg,
+  Name,
+  ProfileName,
+  Tag,
+  Stat
+} from "../../theme/userPage";
+const profilePicture = require("../../theme/assets/profilePicture.png")
 
 
 const UserPage = () => {
@@ -48,29 +59,42 @@ const UserPage = () => {
     }
   }
 
-
+console.log(user)
 
   return <div>
-    user: {user.profileName}
-    <br />
-    name: {user.name}
-    <br />
-    following: {user.following.length}
-    <br />
-    followers: {user.followers.length}
-    <br />
-    {loggedInterface()}
+    <TopContainer>
+      <ProfileImg src={user?.pictureUrl
+        ? user?.pictureUrl
+        : profilePicture} alt={user.profileName} />
+      <Name>
+        {user.name}
+      </Name>
+      <ProfileName>
+        @{user.profileName}
+      </ProfileName>
+    </TopContainer>
+    <MiddleContainer>
+      {loggedInterface()}
 
+    </MiddleContainer>
+    <BottomContainer>
+      <div>
+        <Stat>{user.following.length}</Stat> <Tag>following</Tag>
+      </div>
+      <div>
+        <Stat>{user.followers.length}</Stat> <Tag>followers</Tag>
+      </div>
 
+    </BottomContainer>
+    {user.messages
+      ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
+      : <div>no messages</div>}
   </div>
+
+
+
 }
 
 export default UserPage
 
-
-/*
-    {user.messages
-      ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
-      : <div>no messages</div>}
-      */
 

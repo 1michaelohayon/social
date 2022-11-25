@@ -41,9 +41,7 @@ text-align: center;
 border-radius: ${theme.roundness};
 
 
-&:hover {
-  background-color: ${theme.colors.lowEmphasis};
-}
+
 `
 
 export const Stat = styled.div`
@@ -63,6 +61,12 @@ height: 3em;
 background-color: ${theme.colors.secondryColor};
 border-radius: 50%;
 cursor: pointer;
+border: 1px solid ${theme.colors.lowEmphasis};
+padding: 0.2rem;
+&:hover, &:focus {
+  -webkit-filter: brightness(80%);
+}
+
 `
 
 export const Input = styled.textarea`
@@ -72,4 +76,11 @@ width: 80%;
 word-break: break-word;
 border: 1px solid ${theme.colors.middleColor};
 border-radius: ${theme.roundness};
+`
+export const ReplyContainer = styled.div`
+background-color: ${theme.colors.lowEmphasis};
+
+`
+
+export const MainMessageContainer = styled.div`
 `

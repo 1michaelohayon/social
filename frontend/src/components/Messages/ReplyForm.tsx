@@ -1,6 +1,6 @@
 import useField from "../../hooks/useField"
 import useCreateMessage from "../../hooks/useCreateMessage"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, } from "react-router-dom"
 import Loading from "../Loading"
 import { Input } from "../../theme/message"
 
@@ -24,6 +24,7 @@ const ReplyForm = ({ replyTo }: { replyTo: number }) => {
     <form onSubmit={handleSubmit}>
       <p>reply</p>
       <Input  onChange={content.input.onChange} value={content.input.value} />
+      <br/>
       {loading ? <Loading /> : <button type="submit">Send</button>}
     </form>
   </div>

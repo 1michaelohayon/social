@@ -49,15 +49,15 @@ const SingleMessage = ({ message }: {message: Message}) => {
   return <Container>
     <TopContainer>
       <ProfileImg onClick={() => goToProfile()} src={
-        message.user.pictureUrl
-          ? message.user.pictureUrl
+        message?.user?.pictureUrl
+          ? message?.user?.pictureUrl
           : profilePicture
       } alt="profile" />
       <Name>
-        {message.user.name}
+        {message?.user?.name}
       </Name>
       <ProfileName onClick={() => goToProfile()}>
-        @{message.user.profileName}
+        @{message?.user?.profileName}
       </ProfileName>
     </TopContainer>
 
@@ -80,5 +80,8 @@ const SingleMessage = ({ message }: {message: Message}) => {
     </BottomContainer>
   </Container>
 }
+
+
+
 
 export default SingleMessage

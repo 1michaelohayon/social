@@ -11,21 +11,24 @@ const theme = {
     info: "#d19844",
     success: "#009e81",
   },
-    fontSizes: {
-      small: "0.8em",
-      body: "1em",
-      subheading: "1.5em",
-    },
-    font: "Arial",
-    fontWeights: {
-      normal: '400',
-      bold: '700',
-    },
+  fontSizes: {
+    small: "0.8em",
+    body: "1em",
+    subheading: "1.5em",
+  },
+  font: "Arial",
+  fontWeights: {
+    normal: '400',
+    bold: '700',
+  },
 }
 
 export default theme
 
 export const AppContainer = styled.div`
 background: ${theme.colors.secondryColor}; 
+`
 
+export const MainContainer = styled.div`
+margin-top:55px;
 `

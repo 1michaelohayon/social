@@ -66,6 +66,9 @@ query Query($profileName: String!) {
     ...User
     messages {
       ...Message
+      user {
+        ...User
+      }
     }
     followers {
       followerId

@@ -68,7 +68,7 @@ const resolvers = {
       const user = await User.findOne({
         where: { profileName: args.profileName },
         include: [
-          { model: Message },
+          { model: Message, include: [{ model: User, as: "user" }] },
           { model: likedMessages, include: [{ model: Message, as: "message" }] },
           { model: follower, as: "following" },
           { model: follower, as: "followers" },

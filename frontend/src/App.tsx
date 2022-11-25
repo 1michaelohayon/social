@@ -5,7 +5,7 @@ import useLoggedUser from './hooks/useLoggedUser';
 import UserPage from './components/UserInterface/UserPage';
 import UserSettings from './components/UserInterface/UserSettings';
 import MessagePage from './components/Messages/MessagePage';
-import { AppContainer } from './theme';
+import { AppContainer, MainContainer } from './theme';
 
 
 import {
@@ -24,14 +24,15 @@ const App = () => {
       <AppContainer>
         <UserContext.Provider value={user}>
           <AppBar />
-        
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/settings" element={<UserSettings />} />
-          <Route path="/message/*" element={<MessagePage />} />
-          <Route path="/*" element={<UserPage />} />
+          <MainContainer>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/settings" element={<UserSettings />} />
+              <Route path="/message/*" element={<MessagePage />} />
+              <Route path="/*" element={<UserPage />} />
 
-        </Routes>
+            </Routes>
+          </MainContainer>
         </UserContext.Provider>
       </AppContainer >
     </Router>

@@ -14,10 +14,13 @@ grid-gap: 1rem;
 `
 export const ProfileImg = styled.img`
 width 2em;
-height: 2;
+height:2em;
 background-color: ${theme.colors.secondryColor};
 border-radius: 50%;
 cursor: pointer;
+&:hover, &:focus {
+  -webkit-filter: brightness(80%);
+}
 `
 export const TabsContainer = styled.tbody`
 display: flex;
