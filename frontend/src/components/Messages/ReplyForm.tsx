@@ -2,6 +2,8 @@ import useField from "../../hooks/useField"
 import useCreateMessage from "../../hooks/useCreateMessage"
 import { useNavigate } from "react-router-dom"
 import Loading from "../Loading"
+import { Input } from "../../theme/message"
+
 
 const ReplyForm = ({ replyTo }: { replyTo: number }) => {
   const content = useField("text")
@@ -21,7 +23,7 @@ const ReplyForm = ({ replyTo }: { replyTo: number }) => {
   return <div>
     <form onSubmit={handleSubmit}>
       <p>reply</p>
-      <input {...content.input} />
+      <Input  onChange={content.input.onChange} value={content.input.value} />
       {loading ? <Loading /> : <button type="submit">Send</button>}
     </form>
   </div>

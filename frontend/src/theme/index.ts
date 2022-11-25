@@ -6,7 +6,7 @@ const theme = {
     primaryColor: "#000001",
     secondryColor: "#ffffff ",
     middleColor: "#808080",
-    lowEmphasis: "gray",
+    lowEmphasis: "#eaeaea ",
     error: "#f7401c",
     info: "#d19844",
     success: "#009e81",
