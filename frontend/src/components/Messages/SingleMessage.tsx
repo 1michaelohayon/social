@@ -14,14 +14,15 @@ import {
   ProfileImg,
   Name,
   ProfileName,
-  SecondryButton
+  SecondryButton,
+  ReplyTo
 } from "../../theme/message"
 const profilePicture = require("../../theme/assets/profilePicture.png")
 
 
 
 
-const SingleMessage = ({ message }: {message: Message}) => {
+const SingleMessage = ({ message }: { message: Message }) => {
   const [liked, setLiked] = useState(false)
   const { logged } = useContext(UserContext)
   const { likeMessage } = useAddLike()
@@ -34,6 +35,7 @@ const SingleMessage = ({ message }: {message: Message}) => {
   const alreadyLiked = () => message.likedBy?.some((lm: likedMessage) => lm.user?.id === user?.id)
 
   const goToMessage = () => navigate(`/message/${message.id}`)
+  const goToReply = () => navigate(`/message/${message.reply}`)
   const goToProfile = () => navigate(`/${message.user?.profileName}`)
 
   const handleLike = () => {
@@ -62,13 +64,13 @@ const SingleMessage = ({ message }: {message: Message}) => {
       </ProfileName>
     </TopContainer>
 
+    <ReplyTo onClick={() => goToReply()}>
+      {message.reply ? `Go to Main Message ` : null}
+    </ReplyTo>
 
     <MiddleContainer onClick={() => goToMessage()}>
       <div>
-        {message.reply ? `Reply to ${message.reply}` : null}
-      </div>
-      <div>
-      {content}
+        {content}
       </div>
     </MiddleContainer>
 

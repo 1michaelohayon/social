@@ -10,7 +10,7 @@ display:flex;
 flex-direction: column;
 justify-content: center;
 text-align: center;
-background-color: ${theme.colors.primaryColor};
+background-color: ${theme.colors.lowEmphasis};
 z-index: 0.9;
 width: 100%;
 height: 100%
@@ -36,10 +36,10 @@ grid-template-columns: 1fr 1fr;
 justify-content: center;
 margin-left: 20px;
 margin-right: 20px;
-color: ${theme.colors.secondryColor};
-border: 1px solid ${theme.colors.middleColor};
+color: ${theme.colors.primaryColor};
 padding: 15px;
-background-color: ${theme.colors.primaryColor};
+border: 1px solid ${theme.colors.middleColor};
+background-color: ${theme.colors.lowEmphasis};
 `
 
 export const ProfileImg = styled.img`

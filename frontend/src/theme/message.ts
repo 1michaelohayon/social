@@ -106,3 +106,8 @@ ${PrimaryButton}
 padding: 0.5rem;
 `
 
+export const ReplyTo = styled.div`
+text-align: center;
+cursor: pointer;
+color: ${theme.colors.middleColor};
+`

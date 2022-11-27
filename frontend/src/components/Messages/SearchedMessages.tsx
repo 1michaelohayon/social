@@ -8,7 +8,7 @@ import {
   UserContainer,
   MessageContainer,
   SearchedContainer,
-  Button
+  SecondryButton
 } from "../../theme/userMenu";
 import { useNavigate } from "react-router-dom";
 const profilePicture = require("../../theme/assets/profilePicture.png")
@@ -28,7 +28,7 @@ const SearchedMessages = ({ search, clear }: { search: string, clear: any }) => 
 
   return <SearchedContainer>
     {messages.map((m: Message) => <SearchedMessage key={m.id} message={m} clear={clear} />)}
-    <Button onClick={() => clear()}>clear</Button>
+    <SecondryButton onClick={() => clear()}>Clear</SecondryButton>
   </SearchedContainer>
 }
 

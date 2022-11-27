@@ -1,6 +1,6 @@
 import UserInterface from "./UserInterface"
 import AppBarTab from "./AppBarTab"
-import { Container, ProfileImg } from "../theme/appBar"
+import { Container, ProfileImg, Input} from "../theme/appBar"
 import { useState } from "react"
 import SearchedMessages from "./Messages/SearchedMessages"
 import useField from "../hooks/useField"
@@ -18,7 +18,7 @@ const AppBar = () => {
   return <>
     <Container>
       <AppBarTab title="Messages" to="/" />
-      <input {...search.input} placeholder="Search Messages" />
+      <Input {...search.input} placeholder="Search Messages" />
       <ProfileImg src={logged ?
         logged?.pictureUrl
           ? logged?.pictureUrl

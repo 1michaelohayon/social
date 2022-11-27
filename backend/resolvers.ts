@@ -24,6 +24,7 @@ const resolvers = {
 
     allMessages: async (_root: undefined, args: { after: string }) => {
       const messages = await Message.paginate({
+        where: { reply: null },
         include: [
           { model: User, as: "user" },
           { model: likedMessages, as: "likedBy", include: [{ model: User, as: "user" }] },
@@ -106,6 +107,8 @@ const resolvers = {
       if (!context.currentUser) {
         throw new AuthenticationError("Not logged in")
       }
+
+
       let newMessage = {
         content: args.content,
         userId: context.currentUser.id,
@@ -118,7 +121,13 @@ const resolvers = {
       }
 
       const message = await Message.create(newMessage)
-      await pubsub.publish("MESSAGE_ADDED", { messageAdd: message })
+      const messageWithUser = await Message.findByPk(message?.dataValues.id,
+        {
+          include: [
+            { model: User, as: "user" },
+          ]
+        })
+      await pubsub.publish("MESSAGE_ADDED", { messageAdd: messageWithUser })
       return message
     },
 

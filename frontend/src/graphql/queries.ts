@@ -6,9 +6,13 @@ export const MESSAGE_ADDED = gql`
 subscription Subscription {
   messageAdd {
     ...Message
+    user {
+      ...User
+    }
   }
 }
 ${MESSAGE}
+${USER}
 `
 
 export const GET_MESSAGES = gql`
