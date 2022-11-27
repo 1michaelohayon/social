@@ -25,11 +25,16 @@ cursor: pointer;
   -webkit-filter: brightness(80%);
 }
 `
-export const TabsContainer = styled.tbody`
-display: flex;
-list-style: none;
-
-
+export const Title = styled.div`
+text-align: center;
+font-size: ${theme.fontSizes.subheading};
+background: ${theme.colors.accent};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+cursor: pointer;
+&:hover, &:focus {
+  -webkit-filter: brightness(120%);
+}
 
 `
 export const Input = styled.input`

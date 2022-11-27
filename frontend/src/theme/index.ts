@@ -7,7 +7,7 @@ const theme = {
     primaryColor: "#000001",
     secondryColor: "#ffffff ",
     middleColor: "#808080",
-    accent: "linear-gradient(90deg, rgba(90,156,255,1) 0%, rgba(109,199,255,1) 100%);",
+    accent: "linear-gradient(-15deg, rgba(90,156,255,1) 0%, rgba(109,199,255,1) 100%);",
     lowEmphasis: "#e6e2d8",
     error: "#f7401c",
     info: "#d19844",

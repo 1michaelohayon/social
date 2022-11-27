@@ -1,7 +1,8 @@
 import UserInterface from "./UserInterface"
 import AppBarTab from "./AppBarTab"
-import { Container, ProfileImg, Input} from "../theme/appBar"
+import { Container, ProfileImg, Input, Title} from "../theme/appBar"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import SearchedMessages from "./Messages/SearchedMessages"
 import useField from "../hooks/useField"
 import { UserContext } from "../App"
@@ -13,11 +14,11 @@ const AppBar = () => {
   const [show, setShow] = useState(false)
   const search = useField("text");
   const { logged } = useContext(UserContext)
-
+  const navigate = useNavigate()
 
   return <>
     <Container>
-      <AppBarTab title="Messages" to="/" />
+      <Title onClick={() => navigate("/")}>Meser</Title>
       <Input {...search.input} placeholder="Search Messages" />
       <ProfileImg src={logged ?
         logged?.pictureUrl

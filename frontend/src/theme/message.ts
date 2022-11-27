@@ -99,7 +99,6 @@ export const Button = styled.button`
 ${PrimaryButton}
 background: ${theme.colors.accent};
 color: ${theme.colors.secondryColor};
-box-shadow: ${theme.shadow};
 `
 export const SecondryButton = styled.button`
 ${PrimaryButton}

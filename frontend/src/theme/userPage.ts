@@ -9,7 +9,6 @@ ${PrimaryButton}
 margin: 5px;
 background: ${theme.colors.accent};
 color: ${theme.colors.secondryColor};
-box-shadow: ${theme.shadow};
 `
 export const ProfileImg = styled.img`
 width 9rem;
