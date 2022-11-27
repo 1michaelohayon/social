@@ -1,12 +1,11 @@
 import MessagesList from "./Messages/MessagesList"
-import MessageForm from "./Messages/MessageForm"
+import { MainContainer } from "../theme"
 
 const Main = () => {
 
 
   return (
     <div>
-      <MessageForm />
       <MessagesList />
     </div>
   )

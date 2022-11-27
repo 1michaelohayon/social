@@ -16,7 +16,8 @@ import {
   Name,
   ProfileName,
   Tag,
-  Stat
+  Stat,
+  Button
 } from "../../theme/userPage";
 const profilePicture = require("../../theme/assets/profilePicture.png")
 
@@ -46,7 +47,7 @@ const UserPage = () => {
           ? <div>Following</div>
           : result.loading
             ? <Loading />
-            : <button onClick={handleFollow}>Follow</button>}
+            : <Button onClick={handleFollow}>Follow</Button>}
 
         <br />
 
@@ -59,7 +60,6 @@ const UserPage = () => {
     }
   }
 
-console.log(user)
 
   return <div>
     <TopContainer>
@@ -90,7 +90,6 @@ console.log(user)
       ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
       : <div>no messages</div>}
   </div>
-
 
 
 }

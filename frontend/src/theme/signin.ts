@@ -1,12 +1,13 @@
 
 
 import styled from "styled-components"
-import theme from "."
+import theme, {PrimaryButton} from "."
 
 export const Container = styled.header`
 overflow: hidden;
 display: flex;
 text-align: center;
+top: 0;
 padding-top 2rem;
 padding-bottom 2rem;
 position: fixed;
@@ -14,6 +15,7 @@ z-index: 1;
 backdrop-filter: blur(7px);
 width: 100%;
 height: 100%
+;
 `
 
 export const Input = styled.input`
@@ -26,11 +28,12 @@ margin-bottom: 30px;
 `
 
 export const Button = styled.button`
-background: ${theme.colors.secondryColor};
-font-size: 1em;
-padding: 15px;
-border: 2px solid ${theme.colors.primaryColor};
-font-color: ${theme.colors.primaryColor};
-border-radius: ${theme.roundness};
-cursor: pointer;
+${PrimaryButton}
+margin: 5px;
+background: ${theme.colors.accent};
+color: ${theme.colors.secondryColor};
+box-shadow: ${theme.shadow};
+`
+export const SecondryButton = styled.button`
+${PrimaryButton}
 `

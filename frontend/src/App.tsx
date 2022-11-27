@@ -30,7 +30,6 @@ const App = () => {
               <Route path="/settings" element={<UserSettings />} />
               <Route path="/message/*" element={<MessagePage />} />
               <Route path="/*" element={<UserPage />} />
-
             </Routes>
           </MainContainer>
         </UserContext.Provider>

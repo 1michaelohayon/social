@@ -1,7 +1,7 @@
 import useField from "../../hooks/useField"
 import useCreateMessage from "../../hooks/useCreateMessage"
 import Loading from "../Loading"
-
+import { Input, Button } from "../../theme/message"
 
 const MessageForm = () => {
   const content = useField("text")
@@ -15,11 +15,12 @@ const MessageForm = () => {
 
 
   return <div>
-    <form onSubmit={handleSubmit}>
-      <p>new message</p>
-      <input {...content.input} />
-      {loading ? <Loading /> : <button type="submit">Send</button>}
-    </form>
+      <form onSubmit={handleSubmit}>
+        <p>new message</p>
+        <Input onChange={content.input.onChange} value={content.input.value} />
+        <br />
+        {loading ? <Loading /> : <Button type="submit">Send</Button>}
+      </form>
   </div>
 
 }

@@ -2,10 +2,12 @@ import styled from "styled-components"
 
 const theme = {
   roundness: "0.36rem",
+  shadow: "1.0px 1.0px 3px black",
   colors: {
     primaryColor: "#000001",
     secondryColor: "#ffffff ",
     middleColor: "#808080",
+    accent: "linear-gradient(90deg, rgba(90,156,255,1) 0%, rgba(109,199,255,1) 100%);",
     lowEmphasis: "#eaeaea ",
     error: "#f7401c",
     info: "#d19844",
@@ -22,6 +24,28 @@ const theme = {
     bold: '700',
   },
 }
+
+export const PrimaryButton = `
+padding: 10px;
+padding-left: 20px;
+padding-right: 20px;
+border-radius: ${theme.roundness};
+border: 0px;
+color: ${theme.colors.primaryColor};
+cursor: pointer;
+margin-top: 5px;
+margin-bottom: 5px;
+color: ${theme.colors.primaryColor};
+font-weight: ${theme.fontWeights.bold};
+
+&:hover, &:focus {
+  -webkit-filter: brightness(120%);
+
+}
+
+
+`
+
 
 export default theme
 

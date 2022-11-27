@@ -1,10 +1,11 @@
 
 import styled from "styled-components"
-import theme from "."
+import theme, {PrimaryButton} from "."
 
 
 export const Container = styled.div`
-padding:20px;
+padding-left: 15px;
+padding-right: 15px;
 border: 1px solid ${theme.colors.middleColor};
 border-radius: ${theme.roundness};
 margin: 3px;
@@ -15,7 +16,6 @@ export const TopContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 padding : 10px;
-padding-bottom: 20px;
 border-radius: ${theme.roundness};
 
 
@@ -49,9 +49,12 @@ export const Stat = styled.div`
 
 export const Name = styled.div`
 font-weight: ${theme.fontWeights.bold};
+align-self: center;
+
 `
-export const ProfileName  = styled.div`
+export const ProfileName = styled.div`
 color: ${theme.colors.middleColor};
+align-self: center;
 cursor: pointer;
 `
 
@@ -77,10 +80,29 @@ word-break: break-word;
 border: 1px solid ${theme.colors.middleColor};
 border-radius: ${theme.roundness};
 `
+
+export const InputContainer = styled.div`
+text-align: center;
+
+`
+
 export const ReplyContainer = styled.div`
 background-color: ${theme.colors.lowEmphasis};
+display:flex;
+flex-direction: column;
 
 `
 
 export const MainMessageContainer = styled.div`
 `
+export const Button = styled.button`
+${PrimaryButton}
+background: ${theme.colors.accent};
+color: ${theme.colors.secondryColor};
+box-shadow: ${theme.shadow};
+`
+export const SecondryButton = styled.button`
+${PrimaryButton}
+padding: 0.5rem;
+`
+

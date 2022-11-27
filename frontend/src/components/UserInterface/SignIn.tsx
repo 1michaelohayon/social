@@ -2,7 +2,7 @@ import useSignIn from "../../hooks/useSignIn"
 import useField from "../../hooks/useField"
 import { Credentials } from "../../types"
 import Loading from "../Loading"
-import { Container, Input, Button } from "../../theme/signin"
+import { Container, Input, Button, SecondryButton } from "../../theme/signin"
 
 const SignIn = ({ show, setShow}: { show: boolean, setShow: any }) => {
   const username = useField('text')
@@ -39,7 +39,7 @@ const SignIn = ({ show, setShow}: { show: boolean, setShow: any }) => {
         <Input {...password.input} placeholder="password" />
         <br />
         <Button type="submit">Sign In</Button>
-        <Button onClick={()=> setShow(false)}>cancel</Button>
+        <SecondryButton onClick={()=> setShow(false)}>Cancel</SecondryButton>
       </form>
     </Container>
   )

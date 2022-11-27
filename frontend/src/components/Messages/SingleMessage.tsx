@@ -14,6 +14,7 @@ import {
   ProfileImg,
   Name,
   ProfileName,
+  SecondryButton
 } from "../../theme/message"
 const profilePicture = require("../../theme/assets/profilePicture.png")
 
@@ -63,7 +64,12 @@ const SingleMessage = ({ message }: {message: Message}) => {
 
 
     <MiddleContainer onClick={() => goToMessage()}>
+      <div>
+        {message.reply ? `Reply to ${message.reply}` : null}
+      </div>
+      <div>
       {content}
+      </div>
     </MiddleContainer>
 
     <BottomContainer>
@@ -72,11 +78,11 @@ const SingleMessage = ({ message }: {message: Message}) => {
           ? null
           : liked || alreadyLiked()
             ? "liked!"
-            : <button onClick={handleLike}>like!</button>
+            : <SecondryButton onClick={handleLike}>Like</SecondryButton>
         }
       </div>
 
-      <Togglable children={<ReplyForm replyTo={Number(message.id)} />} buttonLabel="reply" />
+      <Togglable children={<ReplyForm replyTo={Number(message.id)} />} buttonLabel="Reply" />
     </BottomContainer>
   </Container>
 }

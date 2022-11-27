@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { Button, SecondryButton } from "../theme/message"
 
 interface Props {
   children: JSX.Element
@@ -19,11 +19,11 @@ const Togglable = ({ children, buttonLabel }: Props) => {
   return (
     <div>
       <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{buttonLabel}</button>
+        <Button onClick={toggleVisibility}>{buttonLabel}</Button>
       </div>
       <div style={showWhenVisible}>
         {children}
-        <button onClick={toggleVisibility}>cancel</button>
+        <SecondryButton onClick={toggleVisibility}>Cancel</SecondryButton>
       </div>
     </div>
   )

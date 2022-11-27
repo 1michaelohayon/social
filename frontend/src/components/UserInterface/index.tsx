@@ -6,7 +6,7 @@ import { UserContext } from "../../App";
 import { useContext, useState } from "react";
 import { User } from "../../types"
 import Loading from "../Loading";
-import { Container, Button } from "../../theme/userMenu"
+import { Container, Button, SecondryButton } from "../../theme/userMenu"
 
 const UserInterface = ({ show, setShow }: { show: boolean, setShow: any }) => {
   const apolloClient = useApolloClient();
@@ -39,7 +39,7 @@ const UserInterface = ({ show, setShow }: { show: boolean, setShow: any }) => {
       <Button onClick={() => handleClick(`/${user.profileName}`)}>My Page</Button>
       <Button onClick={() => handleClick("/settings")}>Settings</Button>
       <Button onClick={logout}>logout</Button>
-      <Button onClick={() => setShow(false)}>close</Button>
+      <SecondryButton onClick={() => setShow(false)}>Close</SecondryButton>
     </Container>
   }
 
@@ -53,6 +53,7 @@ const UserInterface = ({ show, setShow }: { show: boolean, setShow: any }) => {
       <Container>
         <Button onClick={() => setPage("SignIn")}>Sign in</Button>
         <Button onClick={() => setPage("SignUp")}>Sign up</Button>
+        <SecondryButton onClick={() => setShow(false)}>Close</SecondryButton>
       </Container>
 
     </div>

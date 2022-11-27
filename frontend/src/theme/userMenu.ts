@@ -1,7 +1,7 @@
 
 
 import styled from "styled-components"
-import theme from "."
+import theme, {PrimaryButton} from "."
 
 
 export const Container = styled.div`
@@ -20,13 +20,13 @@ position: fixed;
 
 
 export const Button = styled.button`
-background: ${theme.colors.secondryColor};
-font-size: 1em;
-padding: 15px;
-border: 2px solid ${theme.colors.primaryColor};
-font-color: ${theme.colors.primaryColor};
-border-radius: ${theme.roundness};
-cursor: pointer;
+${PrimaryButton}
+background: ${theme.colors.accent};
+color: ${theme.colors.secondryColor};
+box-shadow: ${theme.shadow};
+`
+export const SecondryButton = styled.button`
+${PrimaryButton}
 `
 
 
