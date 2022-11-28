@@ -1,8 +1,7 @@
-import { gql } from "apollo-server";
-
-
-
-const typeDefs = gql`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const apollo_server_1 = require("apollo-server");
+const typeDefs = (0, apollo_server_1.gql) `
 type User {
   id: ID!
   username: String!
@@ -73,9 +72,7 @@ type Query {
     after: String
   ): MessageConnection!
 
-  users(
-    ids: [Int!]!
-  ): [User!]
+  allUsers: [User!]
 
   findUser(
     profileName: String!
@@ -126,5 +123,5 @@ type Mutation {
   
 }
 
-`
-export default typeDefs
+`;
+exports.default = typeDefs;

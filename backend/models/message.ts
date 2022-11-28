@@ -18,7 +18,11 @@ Message.init({
   },
   content: {
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [1, 280]
+    }
   },
   likes: {
     type: DataTypes.INTEGER,

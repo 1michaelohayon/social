@@ -65,13 +65,11 @@ const SingleMessage = ({ message }: { message: Message }) => {
     </TopContainer>
 
     <ReplyTo onClick={() => goToReply()}>
-      {message.reply ? `Go to Main Message ` : null}
+      {message.reply ? `Go to Main Message` : null}
     </ReplyTo>
 
     <MiddleContainer onClick={() => goToMessage()}>
-      <div>
         {content}
-      </div>
     </MiddleContainer>
 
     <BottomContainer>

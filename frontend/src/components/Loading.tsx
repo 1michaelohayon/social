@@ -1,8 +1,9 @@
-const loading = require("../theme/assets/loading.webp")
+import { LoadingImg } from "../theme"
+const loading = require("../theme/assets/loading.gif")
 
 const Loading = () => {
   return <div>
-    <img src={loading} alt="loading..." />
+    <LoadingImg src={loading} alt="loading..." />
   </div>
 }
 

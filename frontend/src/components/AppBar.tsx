@@ -1,5 +1,4 @@
 import UserInterface from "./UserInterface"
-import AppBarTab from "./AppBarTab"
 import { Container, ProfileImg, Input, Title} from "../theme/appBar"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";

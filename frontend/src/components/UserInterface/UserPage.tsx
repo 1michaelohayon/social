@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useState } from "react";
 import Loading from "../Loading";
+import Followers from "./Followers";
 import {
   TopContainer,
   MiddleContainer,
@@ -25,7 +26,7 @@ const profilePicture = require("../../theme/assets/profilePicture.png")
 const UserPage = () => {
   const match = useMatch("/:profileName")
   const { user, loading } = useFindUser({ profileName: match?.params.profileName?.toString() });
-
+  const [display, setDisplay] = useState<JSX.Element | null>(null);
   const { followUser, result } = useFollow();
   const { logged } = useContext(UserContext);
   const [following, setFollowing] = useState(false)
@@ -60,6 +61,12 @@ const UserPage = () => {
     }
   }
 
+  const userMessages = user.messages
+    ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
+    : <div>no messages</div>
+
+  const followersIds: number[] = user.followers.map((f: Follower) => f.followerId)
+  const followingIds: number[] = user.following.map((f: Follower) => f.userId)
 
   return <div>
     <TopContainer>
@@ -79,16 +86,17 @@ const UserPage = () => {
     </MiddleContainer>
     <BottomContainer>
       <div>
-        <Stat>{user.following.length}</Stat> <Tag>following</Tag>
+        <Stat>{userMessages.length} </Stat> <Tag onClick={() => setDisplay(userMessages)}> {"Messages"}</Tag>
       </div>
       <div>
-        <Stat>{user.followers.length}</Stat> <Tag>followers</Tag>
+        <Stat >{user.following.length}</Stat> <Tag onClick={() => setDisplay(<Followers ids={followingIds} />)}>following</Tag>
+      </div>
+      <div>
+        <Stat>{user.followers.length}</Stat> <Tag onClick={() => setDisplay(<Followers ids={followersIds} />)}>followers</Tag>
       </div>
 
     </BottomContainer>
-    {user.messages
-      ? user.messages.map((message: Message) => <SingleMessage key={message.id} message={message} />)
-      : <div>no messages</div>}
+    {display || userMessages}
   </div>
 
 

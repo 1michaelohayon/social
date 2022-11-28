@@ -121,3 +121,16 @@ query Query($search: String!) {
 ${MESSAGE}
 ${USER}
 `
+
+
+export const GET_USERS = gql`
+query Users($ids: [Int!]!) {
+  users(ids: $ids) {
+    id
+    name
+    profileName
+    username
+    pictureUrl
+  }
+}
+`
