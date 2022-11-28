@@ -1,7 +1,14 @@
 import { Model, DataTypes } from "sequelize"
 import { sequelize } from "../utils/db"
+import {
+  PaginateOptions,
+  PaginationConnection,
+  makePaginate,
+} from 'sequelize-cursor-pagination';
 
-class Message extends Model {}
+class Message extends Model {
+  static paginate: (this: unknown, queryOptions: PaginateOptions<Message>) => Promise<PaginationConnection<Message>>;
+}
 
 Message.init({
   id: {
@@ -18,6 +25,11 @@ Message.init({
     allowNull: true,
     defaultValue: 0,
   },
+  reply: {
+    type: DataTypes.INTEGER,
+    references: { model: 'messages', key: 'id' },
+    allowNull: true,
+  }
 }, {
   sequelize,
   underscored: true,
@@ -25,5 +37,6 @@ Message.init({
   modelName: "message"
 })
 
+Message.paginate = makePaginate(Message)
 
 export default Message

@@ -5,32 +5,34 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev index.ts",
+    "migrate:down": "ts-node-dev ./utils/rollback.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Ohayon",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/sequelize": "^4.28.14",
     "@types/umzug": "^2.3.3",
+    "@types/ws": "^8.5.3",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "@types/jsonwebtoken": "^8.5.9",
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@graphql-tools/schema": "^9.0.10",
     "apollo-server": "^3.11.1",
-    "apollo-server-core": "^3.11.1",
-    "apollo-server-express": "^3.11.1",
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "express-async-errors": "^3.1.1",
     "graphql": "^16.6.0",
     "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.11.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "sequelize": "^6.25.5",
-    "subscriptions-transport-ws": "^0.11.0",
-    "umzug": "^3.2.1"
+    "sequelize-cursor-pagination": "^3.4.0",
+    "umzug": "^3.2.1",
+    "ws": "^8.11.0"
   }
 }

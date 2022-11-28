@@ -16,8 +16,12 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0,
-      }
+      },
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE
     })
+
+    
     await queryInterface.createTable('users', {
       id: {
         type: DataTypes.INTEGER,
