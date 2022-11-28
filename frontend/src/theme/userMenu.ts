@@ -31,10 +31,9 @@ ${PrimaryButton}
 
 export const SearchItem = styled.div`
 display: grid;
+text-align: center;
 grid-template-columns: 1fr 1fr;
-justify-content: center;
-margin-left: 20px;
-margin-right: 20px;
+align-items: center;
 color: ${theme.colors.primaryColor};
 padding: 15px;
 border: 1px solid ${theme.colors.middleColor};

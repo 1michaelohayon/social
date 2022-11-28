@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "migrate:down": "ts-node-dev ./utils/rollback.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "start": "node dist/index.js",
+    "postinstall": "npm run tsc" 
   },
   "author": "Michael Ohayon",
   "license": "ISC",

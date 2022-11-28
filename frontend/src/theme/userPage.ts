@@ -35,7 +35,7 @@ text-align: center;
 `
 export const BottomContainer = styled.div`
 display: grid;
-grid-template-columns: 1fr 1fr ;
+grid-template-columns: 1fr 1fr 1fr;
 padding : 1rem;
 text-align: center;
 `
@@ -49,7 +49,11 @@ color: ${theme.colors.middleColor};
 `
 export const Tag = styled.div`
 color: ${theme.colors.middleColor};
+cursor: pointer;
+:hover {
+  color: ${theme.colors.primaryColor};
+}
 `
-export const Stat = styled.div`
+export const Stat = styled.p`
 font-weight: ${theme.fontWeights.bold};
 `

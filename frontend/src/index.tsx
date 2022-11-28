@@ -16,6 +16,11 @@ import {
 } from '@apollo/client'
 
 
+const server = process.env.REACT_APP_SERVER || 'http://localhost:4000'
+const websocket = process.env.REACT_APP_WEBSOCKET || 'ws://localhost:4000'
+
+
+
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('socialPlatformUserToken')
   return {
@@ -25,10 +30,10 @@ const authLink = setContext((_, { headers }) => {
     }
   }
 })
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
+const httpLink = new HttpLink({ uri: server })
 
 const wsLink = new GraphQLWsLink(
-  createClient({ url: 'ws://localhost:4000', })
+  createClient({ url: websocket, })
 )
 const splitLink = split(
   ({ query }) => {

@@ -52,14 +52,9 @@ const resolvers = {
       limit: 5,
     }),
 
-    allUsers: async () => {
+    users: async (_root: undefined, args: { ids: number[] }) => {
       const users = await User.findAll({
-        include: [
-          { model: Message },
-          { model: likedMessages, include: [{ model: Message, as: "message" }] },
-          { model: follower, as: "following" },
-          { model: follower, as: "followers" },
-        ]
+        where: { id: { [Op.in]: args.ids } },
       })
 
       return users
@@ -165,6 +160,15 @@ const resolvers = {
     },
 
     addUser: async (_root: undefined, args: NewUser) => {
+      if (!args.password) {
+        throw new UserInputError("Password is required")
+      } else if (args.password.length < 3) {
+        throw new UserInputError("Password must be at least 3 characters")
+      } else if (args.password.length > 20) {
+        throw new UserInputError("Password must be at most 20 characters")
+      }
+
+
       const passwordHash = await bcrypt.hash(args.password, 10)
       const profileName = args.profileName ? args.profileName : args.username
       const newUser = {

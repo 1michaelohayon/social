@@ -23,13 +23,14 @@ border-radius: ${theme.roundness};
 `
 
 export const MiddleContainer = styled.div`
+display: flex;
 padding : 10px;
 padding-top: 20px;
 padding-bottom: 20px;
 border-top: 1px solid ${theme.colors.lowEmphasis};
 border-bottom: 1px solid ${theme.colors.lowEmphasis};
 cursor: pointer;
-
+word-break: break-all;
 `
 
 export const BottomContainer = styled.div`

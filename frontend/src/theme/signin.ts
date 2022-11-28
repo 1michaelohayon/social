@@ -12,10 +12,10 @@ padding-top 2rem;
 padding-bottom 2rem;
 position: fixed;
 z-index: 1;
-backdrop-filter: blur(7px);
+backdrop-filter: blur(7px) brightness(0.7);
+back
 width: 100%;
 height: 100%
-;
 `
 
 export const Input = styled.input`

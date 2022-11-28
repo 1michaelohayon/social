@@ -56,7 +56,7 @@ const SearchedMessage = ({ message, clear }: { message: Message, clear: any }) =
   return <div>
     <SearchItem>
       <UserContainer onClick={() => handleUserClick()}>
-        <ProfileImg src={profilePicture} alt={message.user.name} />
+        <ProfileImg src={message?.user?.pictureUrl ? message.user.pictureUrl : profilePicture} alt={message.user.name} />
         {message.user.name}
       </UserContainer>
       <MessageContainer onClick={() => handleMessageClick()}>
