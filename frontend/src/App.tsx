@@ -1,5 +1,5 @@
 import AppBar from './components/AppBar';
-import Main from './components/Main';
+import MessagesList from './components/Messages/MessagesList';
 import { createContext } from "react";
 import useLoggedUser from './hooks/useLoggedUser';
 import UserPage from './components/UserInterface/UserPage';
@@ -26,7 +26,7 @@ const App = () => {
           <AppBar />
           <MainContainer>
             <Routes>
-              <Route path="/" element={<Main />} />
+              <Route path="/" element={<MessagesList />} />
               <Route path="/settings" element={<UserSettings />} />
               <Route path="/message/*" element={<MessagePage />} />
               <Route path="/*" element={<UserPage />} />

@@ -60,6 +60,6 @@ export const LoadingImg = styled.img`
 display: block;
 margin-left: auto;
 margin-right: auto;
-margin-top: 70%;
+margin-top: 50%;
 width: 30%;
 `

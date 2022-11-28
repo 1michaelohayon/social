@@ -67,7 +67,7 @@ border-radius: 50%;
 cursor: pointer;
 border: 1px solid ${theme.colors.lowEmphasis};
 padding: 0.2rem;
-&:hover, &:focus {
+&:hover, &:focus & {
   -webkit-filter: brightness(80%);
 }
 
