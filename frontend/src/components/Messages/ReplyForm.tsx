@@ -10,19 +10,28 @@ const ReplyForm = ({ replyTo }: { replyTo: number }) => {
   const navigate = useNavigate()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await reply(content.input.value, replyTo)
-    content.reset()
-    navigate(`/message/${replyTo}`)
-
+    if (content.input.value.length < 1 || content.input.value.length > 280) {
+      content.setNotification("Message must be between 1 and 280 characters")
+    } else {
+      try {
+        await reply(content.input.value, replyTo)
+        content.reset()
+        navigate(`/message/${replyTo}`)
+      } catch (error) {
+        console.log(error)
+        content.setNotification("You must be logged in to send a message")
+      }
+    }
   }
-
 
 
   return <div>
     <form onSubmit={handleSubmit}>
-      <p>reply</p>
-      <Input  onChange={content.input.onChange} value={content.input.value} />
+      <p>{content.notify}</p>
+      <Input onChange={content.input.onChange} value={content.input.value} />
       <br/>
+      <p>{`${content.input.value.length}/280`}</p>
+      <br />
       {loading ? <Loading /> : <Button type="submit">Send</Button>}
     </form>
   </div>

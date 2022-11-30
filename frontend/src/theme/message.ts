@@ -9,6 +9,8 @@ padding-right: 15px;
 border: 1px solid ${theme.colors.middleColor};
 border-radius: ${theme.roundness};
 margin: 3px;
+margin-top: 10px;
+margin-bottom: 10px;
 `
 
 export const TopContainer = styled.div`

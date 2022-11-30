@@ -15,7 +15,7 @@ import {
   Name,
   ProfileName,
   SecondryButton,
-  ReplyTo
+  ReplyTo,
 } from "../../theme/message"
 const profilePicture = require("../../theme/assets/profilePicture.png")
 
@@ -29,6 +29,7 @@ const SingleMessage = ({ message }: { message: Message }) => {
   const { content, likes } = message
   const [updatedLikes, setUpdatedLikes] = useState(likes)
   const navigate = useNavigate()
+
   const user: User | null = logged
 
 
@@ -47,6 +48,8 @@ const SingleMessage = ({ message }: { message: Message }) => {
       console.log(error)
     }
   }
+
+
 
 
   return <Container>
@@ -80,6 +83,7 @@ const SingleMessage = ({ message }: { message: Message }) => {
             ? "liked!"
             : <SecondryButton onClick={handleLike}>Like</SecondryButton>
         }
+        
       </div>
 
       <Togglable children={<ReplyForm replyTo={Number(message.id)} />} buttonLabel="Reply" />

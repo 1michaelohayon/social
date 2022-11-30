@@ -4,17 +4,17 @@ import styled from "styled-components"
 import theme, {PrimaryButton} from "."
 
 export const Container = styled.header`
+width: 100%;
 overflow: hidden;
 display: flex;
 text-align: center;
+justify-content: center;
 top: 0;
 padding-top 2rem;
 padding-bottom 2rem;
 position: fixed;
 z-index: 1;
 backdrop-filter: blur(7px) brightness(0.7);
-back
-width: 100%;
 height: 100%
 `
 
