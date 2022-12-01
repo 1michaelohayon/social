@@ -24,7 +24,7 @@ const SignUp = ({ show, setShow }: { show: boolean, setShow: any }) => {
     event.preventDefault()
     if (!username.input.value) {
       username.setNotification("Username is required")
-    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(username.input.value)) {
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(username.input.value)) {
       username.setNotification("Username must be a valid email")
     } else if (username.input.value.length < 2 || username.input.value.length > 70) {
       username.setNotification("Username must be between 2 and 70 characters")
