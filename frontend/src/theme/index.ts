@@ -53,7 +53,13 @@ background: ${theme.colors.secondryColor};
 `
 
 export const MainContainer = styled.div`
-margin-top:55px;
+margin-top:60px;
+margin-left: 5%;
+margin-right: 5%;
+@media (min-width: 1000px) {
+  margin-left: 15%;
+  margin-right: 15%;
+}
 `
 
 export const LoadingImg = styled.img`

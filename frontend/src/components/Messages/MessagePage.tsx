@@ -23,10 +23,10 @@ const MessagePage = () => {
 
   return <>
     <MainMessageContainer>
-    <SingleMessage message={message} />
+      <SingleMessage message={message} />
     </MainMessageContainer>
 
-    replies
+    <p>Replies</p>
     <ReplyContainer>
       {replies ?
         replies.map((m: Message) => <SingleMessage key={m.id} message={m} />)

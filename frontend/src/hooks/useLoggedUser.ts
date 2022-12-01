@@ -20,6 +20,7 @@ const useLoggedUser = () => {
     if (response.data) {
       fetchLoggedUser();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response.data]);
 
   return { logged, loading, refetch: response.refetch, };
