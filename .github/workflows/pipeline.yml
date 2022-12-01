@@ -1,0 +1,44 @@
+name: Backend Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+
+jobs:
+  backend_pipline:
+    if: ${{ !contains(join(github.event.commits.*.message), '#skip_backend') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "19"
+      - name: npm install
+        run: npm install
+        working-directory: ./backend
+
+      - name: build
+        run: npm run postinstall
+        working-directory: ./backend
+
+
+  frontend_pipline:
+    if: ${{ !contains(join(github.event.commits.*.message), '#skip_frontend') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '19'
+      - name: npm install
+        run: npm install
+        working-directory: ./frontend
+
+      - name: build
+        run: npm run build
+        working-directory: ./frontend
