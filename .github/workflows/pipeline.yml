@@ -50,6 +50,11 @@ jobs:
         run: npm run build
         working-directory: ./frontend
 
+
+      - name: npm install backend
+        run: npm install
+        working-directory: ./backend
+
       - name: start server
         run : npm run dev
         working-directory: ./backend
