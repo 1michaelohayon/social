@@ -21,12 +21,12 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      - name: testing
-        run: npm test
-        working-directory: ./backend
-
       - name: build
         run: npm run postinstall
+        working-directory: ./backend
+
+      - name: testing
+        run: npm test
         working-directory: ./backend
 
   frontend_pipline:

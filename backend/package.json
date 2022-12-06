@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "migrate:down": "ts-node-dev ./utils/rollback.ts",
-    "test": "jest --config jest.config.ts ./__tests__",
+    "test": "jest --config jest.config.ts",
     "tsc": "tsc",
     "start": "node dist/index.js",
     "postinstall": "npm run tsc"
