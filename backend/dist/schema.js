@@ -72,7 +72,9 @@ type Query {
     after: String
   ): MessageConnection!
 
-  allUsers: [User!]
+  users(
+    ids: [Int!]!
+  ): [User!]
 
   findUser(
     profileName: String!

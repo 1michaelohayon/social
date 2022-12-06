@@ -61,14 +61,9 @@ const resolvers = {
                 limit: 5,
             });
         }),
-        allUsers: () => __awaiter(void 0, void 0, void 0, function* () {
+        users: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
             const users = yield User.findAll({
-                include: [
-                    { model: Message },
-                    { model: likedMessages, include: [{ model: Message, as: "message" }] },
-                    { model: follower_1.default, as: "following" },
-                    { model: follower_1.default, as: "followers" },
-                ]
+                where: { id: { [sequelize_1.Op.in]: args.ids } },
             });
             return users;
         }),
@@ -157,6 +152,15 @@ const resolvers = {
             return yield follower_1.default.create(newFollow);
         }),
         addUser: (_root, args) => __awaiter(void 0, void 0, void 0, function* () {
+            if (!args.password) {
+                throw new apollo_server_core_1.UserInputError("Password is required");
+            }
+            else if (args.password.length < 3) {
+                throw new apollo_server_core_1.UserInputError("Password must be at least 3 characters");
+            }
+            else if (args.password.length > 20) {
+                throw new apollo_server_core_1.UserInputError("Password must be at most 20 characters");
+            }
             const passwordHash = yield bcrypt_1.default.hash(args.password, 10);
             const profileName = args.profileName ? args.profileName : args.username;
             const newUser = {
