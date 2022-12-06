@@ -51,7 +51,7 @@ jobs:
         working-directory: ./frontend
 
 
-      - name: npm install backend
+      - name: npm install backend for e2e tests
         run: npm install
         working-directory: ./backend
 
@@ -62,5 +62,17 @@ jobs:
           start: npm run start:all
           working-directory: ./frontend
           wait-on: http://localhost:4000
-
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          DEFAULT_BUMP: patch
 
