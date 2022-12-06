@@ -50,6 +50,9 @@ jobs:
         run: npm run build
         working-directory: ./frontend
 
+      - name: start server
+        run : npm run dev
+        working-directory: ./backend
 
       - name: e2e tests
         uses: cypress-io/github-action@v4
@@ -57,6 +60,6 @@ jobs:
           browser: chrome
           start: npm start
           working-directory: ./frontend
-          wait-on: https://nameless-shore-55160.herokuapp.com/
+          wait-on: http://localhost:4000
 
 
