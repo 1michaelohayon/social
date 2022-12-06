@@ -8,6 +8,10 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  DATABASE_URL=${{secrets.DATABASE_URL}}
+
+
 jobs:
   backend_pipline:
     if: ${{ !contains(join(github.event.commits.*.message), '#skip_backend') }}
