@@ -55,15 +55,11 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      - name: start server
-        run : npm run dev
-        working-directory: ./backend
-
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          start: npm start
+          start: npm run start:all
           working-directory: ./frontend
           wait-on: http://localhost:4000
 
