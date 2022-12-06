@@ -6,20 +6,24 @@
   "scripts": {
     "dev": "ts-node-dev index.ts",
     "migrate:down": "ts-node-dev ./utils/rollback.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jest.config.ts",
     "tsc": "tsc",
     "start": "node dist/index.js",
-    "postinstall": "npm run tsc" 
+    "postinstall": "npm run tsc"
   },
   "author": "Michael Ohayon",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/jest": "^29.2.4",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/sequelize": "^4.28.14",
     "@types/umzug": "^2.3.3",
     "@types/ws": "^8.5.3",
     "ts-node": "^10.9.1",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.4"
   },

@@ -13,7 +13,11 @@ Message.init({
     },
     content: {
         type: sequelize_1.DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [1, 280]
+        }
     },
     likes: {
         type: sequelize_1.DataTypes.INTEGER,

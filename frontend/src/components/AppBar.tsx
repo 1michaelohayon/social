@@ -23,7 +23,7 @@ const AppBar = () => {
         logged?.pictureUrl
           ? logged?.pictureUrl
           : profilePicture
-        : profilePicture} alt="profile" onClick={() => setShow(!show)} />
+        : profilePicture} alt="me" onClick={() => setShow(!show)} />
 
 
     </Container>

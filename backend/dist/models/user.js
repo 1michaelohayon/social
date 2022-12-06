@@ -15,12 +15,18 @@ User.init({
         unique: true,
         allowNull: false,
         validate: {
-            isEmail: true
+            isEmail: true,
+            notEmpty: true,
+            len: [2, 70]
         }
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [2, 40]
+        }
     },
     passwordHash: {
         type: sequelize_1.DataTypes.STRING,
@@ -33,7 +39,10 @@ User.init({
     profileName: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            len: [2, 40]
+        }
     },
 }, {
     sequelize: db_1.sequelize,
