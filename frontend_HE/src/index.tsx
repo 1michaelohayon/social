@@ -17,7 +17,7 @@ import {
 
 
 const server = process.env.REACT_APP_SERVER || "https://small-wood-4274.fly.dev/"
-const websocket = process.env.REACT_APP_WEBSOCKET || "=wss://small-wood-4274.fly.dev/"
+const websocket = process.env.REACT_APP_WEBSOCKET || "wss://small-wood-4274.fly.dev/"
 
 
 
