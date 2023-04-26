@@ -36,10 +36,10 @@ const UserInterface = ({ show, setShow }: { show: boolean, setShow: any }) => {
     } else if (user) {
         return <Container>
             {user.profileName}
-            <Button onClick={() => handleClick(`/${user.profileName}`)}>My Page</Button>
-            <Button onClick={() => handleClick("/settings")}>Settings</Button>
-            <Button onClick={logout}>logout</Button>
-            <SecondryButton onClick={() => setShow(false)}>Close</SecondryButton>
+            <Button onClick={() => handleClick(`/${user.profileName}`)}>העמוד שלי</Button>
+            <Button onClick={() => handleClick("/settings")}>הגדרות</Button>
+            <Button onClick={logout}>התנתק</Button>
+            <SecondryButton onClick={() => setShow(false)}>סגור</SecondryButton>
         </Container>
     }
 
@@ -51,9 +51,9 @@ const UserInterface = ({ show, setShow }: { show: boolean, setShow: any }) => {
             <SignIn show={page === "SignIn"} setShow={setPage} />
             <SignUp show={page === "SignUp"} setShow={setPage} />
             <Container>
-                <Button onClick={() => setPage("SignIn")}>Sign in</Button>
-                <Button onClick={() => setPage("SignUp")}>Sign up</Button>
-                <SecondryButton onClick={() => setShow(false)}>Close</SecondryButton>
+                <Button onClick={() => setPage("SignUp")}>הרשמה</Button>
+                <Button onClick={() => setPage("SignIn")}>התחבר</Button>
+                <SecondryButton onClick={() => setShow(false)}>סגור</SecondryButton>
             </Container>
 
         </div>
