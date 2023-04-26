@@ -16,8 +16,9 @@ import {
 } from '@apollo/client'
 
 
-const server = process.env.REACT_APP_SERVER || 'http://localhost:4000'
-const websocket = process.env.REACT_APP_WEBSOCKET || 'ws://localhost:4000'
+
+const server = process.env.REACT_APP_SERVER || "https://small-wood-4274.fly.dev/"
+const websocket = process.env.REACT_APP_WEBSOCKET || "=wss://small-wood-4274.fly.dev/"
 
 
 
