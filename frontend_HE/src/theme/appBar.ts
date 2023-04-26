@@ -10,8 +10,10 @@ grid-template-columns: 1fr 1fr 1fr;
 background:linear-gradient(90deg, rgba(255,244,239,1) 0%, rgba(223,222,220,1) 100%);
 ;
 width: 100%;
-padding: 10px;
+padding: 15px;
 grid-gap: 1rem;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 8px 30px rgba(0, 0, 0, 0.1);
+
 `
 export const ProfileImg = styled.img`
 width 2em;
@@ -39,6 +41,7 @@ cursor: pointer;
 
 `
 export const Input = styled.input`
+direction: rtl;
 border: 1px solid ${theme.colors.middleColor};
 border-radius: ${theme.roundness};
 padding: 0.5rem;

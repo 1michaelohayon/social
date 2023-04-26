@@ -50,11 +50,10 @@ font-weight: ${theme.fontWeights.bold};
 export default theme
 
 export const AppContainer = styled.div`
-background: ${theme.colors.secondryColor}; 
 `
 
 export const MainContainer = styled.div`
-margin-top:60px;
+margin-top:87px;
 margin-left: 5%;
 margin-right: 5%;
 @media (min-width: 1000px) {

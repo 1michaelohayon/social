@@ -29,8 +29,8 @@ const MessagesList = () => {
     if (loading) {
         return <Loading />
     } else if (!messages) {
-        <Togglable buttonLabel="New Message" children={<MessageForm />} />
-        return <div>no messages..</div>
+        <Togglable buttonLabel="הודעה חדשה" children={<MessageForm />} />
+        return <div>אין הודעות</div>
     }
 
 
@@ -40,7 +40,7 @@ const MessagesList = () => {
     const liveMessages = subscribe.newMessages.map(message => <SingleMessage key={message.id} message={message} />)
     return <div>
         <InputContainer>
-            <Togglable buttonLabel="New Message" children={<MessageForm />} />
+            <Togglable buttonLabel="הודעה חדשה" children={<MessageForm />} />
         </InputContainer>
         {liveMessages}
         {messageList}

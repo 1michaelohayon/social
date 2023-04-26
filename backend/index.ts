@@ -3,6 +3,7 @@ import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import express from "express";
 import http from "http";
+//import cors from 'cors'
 
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
@@ -18,66 +19,70 @@ import { connectToDatabase } from "./utils/db"
 
 
 interface JwtPayload {
-  id: number
+    id: number
 }
 
 
-
+console.log("Client URL:", config.CLIENT_URL)
 
 const start = async () => {
-  await connectToDatabase()
+    await connectToDatabase()
 
-  const app = express()
-  const httpServer = http.createServer(app);
+    const app = express()
+    const httpServer = http.createServer(app);
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
+    const schema = makeExecutableSchema({ typeDefs, resolvers })
 
-  const wsServer = new WebSocketServer({
-    server: httpServer,
-    path: '/',
-  });
+    const wsServer = new WebSocketServer({
+        server: httpServer,
+        path: '/',
+    });
 
-  const serverCleanup = useServer({ schema }, wsServer);
+    const serverCleanup = useServer({ schema }, wsServer);
 
 
-  const server = new ApolloServer({
-    schema,
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.toLowerCase().startsWith('bearer ')) {
-        const decodedToken = jwt.verify(
-          auth.substring(7), config.SECRET
-        ) as JwtPayload
+    const server = new ApolloServer({
+        schema,
+        context: async ({ req }) => {
+            const auth = req ? req.headers.authorization : null
+            if (auth && auth.toLowerCase().startsWith('bearer ')) {
+                const decodedToken = jwt.verify(
+                    auth.substring(7), config.SECRET
+                ) as JwtPayload
 
-        const currentUser = await User.findByPk(decodedToken.id, { include: [
-          { model: likedMessages, include: [{ model: Message, as: "message" }] },
-        ]})
+                const currentUser = await User.findByPk(decodedToken.id, {
+                    include: [
+                        { model: likedMessages, include: [{ model: Message, as: "message" }] },
+                    ]
+                })
 
-        return { currentUser }
-      } else return null
-    },
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer }),
-    {
-      async serverWillStart() {
-        return {
-          async drainServer() {
-            await serverCleanup.dispose()
-          },
-        }
-      },
-    },
-    ],
-  })
+                return { currentUser }
+            } else return null
+        },
+        plugins: [ApolloServerPluginDrainHttpServer({ httpServer }),
+        {
+            async serverWillStart() {
+                return {
+                    async drainServer() {
+                        await serverCleanup.dispose()
+                    },
+                }
+            },
+        },
+        ],
+    })
 
-  await server.start()
-  server.applyMiddleware({
-    app,
-    path: '/'
-  })
+    await server.start()
 
-  httpServer.listen(config.PORT, () =>
-    console.log(`Server is now running on http://localhost:${config.PORT}`)
-  )
+
+    server.applyMiddleware({
+        app,
+        path: '/'
+    })
+
+    httpServer.listen(config.PORT, () =>
+        console.log(`Server is now running on http://localhost:${config.PORT}`)
+    )
 }
 
 start()
